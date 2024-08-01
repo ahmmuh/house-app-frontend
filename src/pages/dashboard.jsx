@@ -12,7 +12,8 @@ function Dashboard(props) {
                     <Sidebar />
                 </div>
                 <div className={"col"}>
-                    <Outlet />
+                    <h3>Välkommen till admin</h3>
+                    <Outlet/>
                 </div>
             </div>
         </div>

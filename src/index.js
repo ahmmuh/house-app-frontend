@@ -7,10 +7,7 @@ import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import Dashboard from "./pages/dashboard";
 import CreateHouse from "./pages/createHouse";
 import Content from "./pages/content";
-import Sidebar from "./pages/sidebar";
 import NotFound from "./pages/notFound";
-import TestPage from "./pages/TestPage";
-import Menu from "./pages/menu";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const router = createBrowserRouter([

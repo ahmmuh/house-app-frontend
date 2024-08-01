@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 function Sidebar(props) {
     return (
         <ul className={'list-group'}>
-            <li className={'list-group-item bg-light'}>Sidebar</li>
+            <li className={'list-group-item bg-light'}>Useful Links</li>
             <li className={'list-group-item'}>
                 <Link to="/dashboard/content">Houses</Link>
             </li>
