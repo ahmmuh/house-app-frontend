@@ -18,31 +18,31 @@ const HouseProvider = ({ children }) => {
        const loadHouseTransactions = async () => {
            const houseTransactions = await getHouseTransactions("houseTransactions");
            setHouseTransactions(houseTransactions)
-           console.log("houseTransactions", houseTransactions);
+          // console.log("houseTransactions", houseTransactions);
        }
 
        const loadHouseWifi = async () => {
            const houseWifi =  await getHouseWifi("houseWifi");
            setHouseWifi(houseWifi);
-           console.log("houseWifi", houseWifi);
+          // console.log("houseWifi", houseWifi);
        }
 
        const loadHouseWater = async () => {
            const houseWater = await getHouseWater("houseWater")
            setHouseWater( houseWater);
-           console.log("houseWater", houseWater);
+           //console.log("houseWater", houseWater);
 
        }
        const loadHouseParking = async () => {
            const houseParkings = await getHouseparking("houseParking")
            setHouseParking(houseParkings)
-           console.log("houseParking", houseParkings)
+           //console.log("houseParking", houseParkings)
        }
 
     const loadHouseTypes = async () =>{
         const houseType = await getHouseTypes("houseType");
         setHouseType(houseType);
-        console.log("houseType", houseType);
+        //console.log("houseType", houseType);
     }
 
     useEffect(() => {
