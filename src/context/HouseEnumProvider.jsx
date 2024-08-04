@@ -1,46 +1,45 @@
 import React, {useEffect, useState} from 'react';
 import {
-    getHouseWater,
-    getHouseTypes,
-    getHouseWifi,
-    getHouseTransactions,
-    getHouseparking
-} from '../backend/houseService';
-import HouseContext from "./HouseContext";
-const HouseProvider = ({ children }) => {
+    getHouseTransactionsEnums,
+    getHouseWifiEnums,
+    getHouseWaterEnums,
+    getHouseparkingEnums,
+    getHouseTypesEnums
+} from '../backend/enumService.js';
+import HouseEnumContext from "./HouseEnumContext";
+const HouseEnumProvider = ({ children }) => {
     const [houseType, setHouseType] = useState([]);
     const [houseTransactions, setHouseTransactions] = useState([]);
     const [houseWifi, setHouseWifi] = useState([]);
     const [houseWater, setHouseWater] = useState([]);
     const [houseParking, setHouseParking] = useState([]);
 
-
        const loadHouseTransactions = async () => {
-           const houseTransactions = await getHouseTransactions("houseTransactions");
+           const houseTransactions = await getHouseTransactionsEnums("houseTransactions");
            setHouseTransactions(houseTransactions)
           // console.log("houseTransactions", houseTransactions);
        }
 
        const loadHouseWifi = async () => {
-           const houseWifi =  await getHouseWifi("houseWifi");
+           const houseWifi =  await getHouseWifiEnums("houseWifi");
            setHouseWifi(houseWifi);
           // console.log("houseWifi", houseWifi);
        }
 
        const loadHouseWater = async () => {
-           const houseWater = await getHouseWater("houseWater")
+           const houseWater = await getHouseWaterEnums("houseWater")
            setHouseWater( houseWater);
            //console.log("houseWater", houseWater);
 
        }
        const loadHouseParking = async () => {
-           const houseParkings = await getHouseparking("houseParking")
+           const houseParkings = await getHouseparkingEnums("houseParking")
            setHouseParking(houseParkings)
            //console.log("houseParking", houseParkings)
        }
 
     const loadHouseTypes = async () =>{
-        const houseType = await getHouseTypes("houseType");
+        const houseType = await getHouseTypesEnums("houseType");
         setHouseType(houseType);
         //console.log("houseType", houseType);
     }
@@ -56,7 +55,7 @@ const HouseProvider = ({ children }) => {
 
     return(
 
-   <HouseContext.Provider value={{
+   <HouseEnumContext.Provider value={{
        houseType,
        houseTransactions,
        houseWater,
@@ -64,12 +63,12 @@ const HouseProvider = ({ children }) => {
        houseParking
    }}>
        {children}
-   </HouseContext.Provider>
+   </HouseEnumContext.Provider>
     )
 
 
 }
 
 
-export default HouseProvider;
+export default HouseEnumProvider;
 

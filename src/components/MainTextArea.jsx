@@ -3,6 +3,7 @@ import React from 'react';
 function MainTextArea({
     placeholder,
     changeHandler,
+    name,
     cols,
     rows,
     ...props

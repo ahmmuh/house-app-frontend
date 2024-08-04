@@ -8,6 +8,7 @@ import Dashboard from "./pages/dashboard";
 import CreateHouse from "./pages/createHouse";
 import Content from "./pages/content";
 import NotFound from "./pages/notFound";
+import CreateHouseCategory from "./pages/create-house-category";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const router = createBrowserRouter([
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
                     {
                         path: "create",
                         element: <CreateHouse />,
+                    },
+                    {
+                        path: "createCategory",
+                        element: <CreateHouseCategory />,
                     },
                     {
                         path: "content",

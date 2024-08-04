@@ -1,17 +1,19 @@
 import './App.css';
 import {Outlet} from "react-router-dom";
-import HouseProvider from "./context/HouseProvider";
+import HouseEnumProvider from "./context/HouseEnumProvider";
 import Menu from "./pages/menu";
+import DashboardProvider from "./context/DashboardProvider";
 
 function App() {
     return (
-      <HouseProvider>
-          <Menu/>
-          <div className={'container mt-4'}>
-              <h3>Välkommen till oss</h3>
-              <Outlet />
-          </div>
-      </HouseProvider>
+      <HouseEnumProvider>
+          <DashboardProvider>
+                  <Menu/>
+                  <div className={'container mt-4'}>
+                      <Outlet />
+                  </div>
+          </DashboardProvider>
+      </HouseEnumProvider>
     );
 }
 

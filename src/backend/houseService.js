@@ -1,20 +1,6 @@
 import axios from "axios";
+import {BASE_URL} from "./base_url";
 
-
-const BASE_URL = 'http://localhost:5000/api'
-
-
-
-export const addHouse = async (house) => {
-    try{
-        const res = await axios.post(`${BASE_URL}/houses`, house);
-        return res.data.data;
-    }
-    catch(error){
-        console.log(error)
-    }
-
-}
 export const createHouse = async (house) => {
     try {
         const res = await axios.post(`${BASE_URL}/houses`,  house);
@@ -66,39 +52,4 @@ export const countHouses = async (count) => {
     return res.data
 }
 
-//house types fetch from mongoose enums och inte from Database (hårdkodad data).
-export const getHouseTypes = async (houseType) => {
-    try{
-        const res = await axios.get(`${BASE_URL}/houses/enums/${houseType}`)
-        return res.data;
-    }
-    catch (error) {
-        console.error("Error fetching HouseTypes ", error);
-        throw error;
-    }
-
-}
-
-
-export const getHouseTransactions = async (houseTransactions) => {
-    const res = await axios.get(`${BASE_URL}/houses/enums/${houseTransactions}`)
-    return  res.data;
-}
-
-export const getHouseWater = async (houseWater) => {
-    const res = await axios.get(`${BASE_URL}/houses/enums/${houseWater}`)
-    return  res.data;
-}
-
-
-export const getHouseWifi = async (houseWifi) => {
-    const res = await axios.get(`${BASE_URL}/houses/enums/${houseWifi}`)
-    return  res.data;
-}
-
-
-export const getHouseparking = async (houseparking) => {
-    const res = await axios.get(`${BASE_URL}/houses/enums/${houseparking}`)
-    return  res.data;
-}
 

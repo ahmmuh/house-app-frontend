@@ -1,14 +1,18 @@
 import React, {useContext, useEffect, useState,} from 'react';
 import MainInput from "../components/MainInput";
 import MainSelect from "../components/MainSelect";
-import HouseContext from "../context/HouseContext";
+import HouseEnumContext from "../context/HouseEnumContext";
 import MainTextArea from "../components/MainTextArea";
 import {createHouse} from "../backend/houseService";
 import {convertImagebase64} from "../utils/convertImagebase64";
+import SaveButton from "../components/SaveButton";
+import DashboardContext from "../context/DashboardContext";
 
 function CreateHouse() {
 
-    const houseData = useContext(HouseContext);
+    const houseData = useContext(HouseEnumContext);
+    const {houseCategory} = useContext(DashboardContext)
+    console.log("houseCategory", houseCategory);
     const [house,setHouse] = useState({
         houseType:"",
         houseTransactions:"",
@@ -26,6 +30,7 @@ function CreateHouse() {
        // thumbnail:null,
         images: [],
         houseParking: "",
+        category:""
   /*      location: {
             latitude: 0,
             longitude: 0
@@ -67,9 +72,9 @@ const houseParkingOptions = houseParking.map(house_parking =>({
     label: house_transaction,
     value: house_transaction
 }))
- const houseTypeOptions = houseType.map(type =>({
-        label: type,
-        value: type
+const houseCategoryOptions = houseCategory.map(category =>({
+        label: category.name,
+        value: category.name
     }))
     //console.log("houseTypeOptions",houseTypeOptions)
 
@@ -126,7 +131,8 @@ const houseParkingOptions = houseParking.map(house_parking =>({
             houseTransactions: house.houseTransactions,
             houseWidth: house.houseWidth,
             houseHeight: house.houseHeight,
-            images: images
+            images: images,
+            category: house.category
         }
         setHouse(prevState => ({
             ...prevState,
@@ -142,10 +148,10 @@ const houseParkingOptions = houseParking.map(house_parking =>({
         <form onSubmit={handleSubmit} encType="multipart/form-data">
             <MainSelect
             label={'Nuuca guriga'}
-            name="houseType"
-            id="houseType"
-            value={house.houseType}
-            options={houseTypeOptions}
+            name="category"
+            id="category"
+            value={house.category.name}
+            options={houseCategoryOptions}
             onChange={changeHandler}
 
             />
@@ -310,8 +316,12 @@ const houseParkingOptions = houseParking.map(house_parking =>({
 
     </MainTextArea>
 
-<button type={'submit'} className={'btn btn-danger btn-md mt-2'}>Spara</button>
-        </form>
+            <SaveButton
+                type={'submit'}
+                title={'Spara'}
+                textColor={'text-primary'}
+                backgroundColor={'btn btn-danger btn-md mt-3'}
+            ></SaveButton>        </form>
     );
 }
 

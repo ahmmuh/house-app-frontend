@@ -1,8 +1,8 @@
 import React, {useContext} from 'react';
-import HouseContext from "../context/HouseContext";
+import HouseEnumContext from "../context/HouseEnumContext";
 
 function Content() {
-    const housesData = useContext(HouseContext)
+    const housesData = useContext(HouseEnumContext)
     console.log("housesData from content",housesData)
     return (
         <div>
