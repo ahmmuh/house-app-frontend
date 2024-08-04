@@ -7,7 +7,7 @@ function App() {
     return (
       <HouseProvider>
           <Menu/>
-          <div className={'container'}>
+          <div className={'container mt-4'}>
               <h3>Välkommen till oss</h3>
               <Outlet />
           </div>
