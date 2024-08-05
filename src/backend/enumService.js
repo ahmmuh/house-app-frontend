@@ -34,3 +34,30 @@ export const getHouseparkingEnums = async (houseparking) => {
     const res = await axios.get(`${BASE_URL}/houses/enums/${houseparking}`)
     return  res.data;
 }
+
+
+export const getHouseRoomTypesEnums = async (roomType) => {
+    const res = await axios.get(`${BASE_URL}/houses/enums/${roomType}`)
+    return  res.data;
+}
+
+export const getHouseKitchenEnums = async (houseKitchen) => {
+    const res = await axios.get(`${BASE_URL}/houses/enums/${houseKitchen}`)
+    return  res.data;
+}
+
+export const getHouseStairsEnums = async (houseStairs) => {
+    const res = await axios.get(`${BASE_URL}/houses/enums/${houseStairs}`)
+    return  res.data;
+}
+
+export const getHouseToiletTypeEnums = async (toiletType) => {
+    const res = await axios.get(`${BASE_URL}/houses/enums/${toiletType}`)
+    return  res.data;
+}
+export const getHousePrivateBathroomEnums = async (privateBathroom) => {
+    const res = await axios.get(`${BASE_URL}/houses/enums/${privateBathroom}`)
+    return  res.data;
+}
+
+

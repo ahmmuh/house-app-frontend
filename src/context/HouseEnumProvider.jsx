@@ -4,7 +4,7 @@ import {
     getHouseWifiEnums,
     getHouseWaterEnums,
     getHouseparkingEnums,
-    getHouseTypesEnums
+    getHouseTypesEnums, getHouseRoomTypesEnums, getHouseStairsEnums, getHouseKitchenEnums
 } from '../backend/enumService.js';
 import HouseEnumContext from "./HouseEnumContext";
 const HouseEnumProvider = ({ children }) => {
@@ -14,6 +14,24 @@ const HouseEnumProvider = ({ children }) => {
     const [houseWater, setHouseWater] = useState([]);
     const [houseParking, setHouseParking] = useState([]);
 
+    const [roomType, setRoomType] = useState([]);
+    const [houseStairs, setHouseStairs] = useState([]);
+    const [houseKitchen,setHouseKitchen] = useState([]);
+    //const [houseKitchen,setHouseKitchen] = useState([]);
+    const loadRoomTypes = async () => {
+        const roomTypes = await getHouseRoomTypesEnums("roomType");
+        setRoomType(roomTypes);
+    }
+
+    const loadHouseStairs = async () => {
+        const houseStairs = await getHouseStairsEnums("houseStairs");
+        setHouseStairs(houseStairs);
+    }
+
+    const loadHouseKitchen = async () => {
+        const houseKitchen = await getHouseKitchenEnums("houseKitchen");
+        setHouseKitchen(houseKitchen);
+    }
        const loadHouseTransactions = async () => {
            const houseTransactions = await getHouseTransactionsEnums("houseTransactions");
            setHouseTransactions(houseTransactions)
@@ -50,7 +68,9 @@ const HouseEnumProvider = ({ children }) => {
         loadHouseWater();
         loadHouseWifi()
         loadHouseTransactions()
-
+        loadRoomTypes()
+        loadHouseStairs()
+        loadHouseKitchen()
     },[])
 
     return(
@@ -60,7 +80,10 @@ const HouseEnumProvider = ({ children }) => {
        houseTransactions,
        houseWater,
        houseWifi,
-       houseParking
+       houseParking,
+       roomType,
+       houseStairs,
+       houseKitchen
    }}>
        {children}
    </HouseEnumContext.Provider>

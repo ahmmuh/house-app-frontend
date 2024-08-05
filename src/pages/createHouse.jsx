@@ -11,8 +11,11 @@ import DashboardContext from "../context/DashboardContext";
 function CreateHouse() {
 
     const houseData = useContext(HouseEnumContext);
+    console.log("ALl house data", houseData)
     const {houseCategory} = useContext(DashboardContext)
-    console.log("houseCategory", houseCategory);
+    const [selectedCategory,setSelectedCategory] = useState('');
+    const [selectHouseTransaction, setHouseTransaction] = useState('')
+    // console.log("houseCategory", houseCategory);
     const [house,setHouse] = useState({
         houseType:"",
         houseTransactions:"",
@@ -27,14 +30,16 @@ function CreateHouse() {
         houseWifi:"",
         houseWater:"",
         toilets:1,
-       // thumbnail:null,
+        roomType:"",
+        // thumbnail:null,
         images: [],
         houseParking: "",
-        category:""
-  /*      location: {
-            latitude: 0,
-            longitude: 0
-        }*/
+        category:"",
+        houseStair:"",
+        /*      location: {
+                  latitude: 0,
+                  longitude: 0
+              }*/
     })
 
 
@@ -42,40 +47,79 @@ function CreateHouse() {
         houseTransactions,
         houseWater,
         houseWifi,
+        roomType,
+        houseStairs,
+        houseKitchen,
         houseParking} = houseData
-   // console.log("House wifi", houseWifi);
-    //console.log("House transactions", houseTransactions);
+    // console.log("House wifi", houseWifi);
+    console.log("House transactions", houseTransactions);
     //console.log("House houseParking", houseParking);
     //console.log("House water", houseWater);
     //console.log("houseType", houseType);
+   console.log("roomType", roomType);
+
+    console.log("house Stairs", houseStairs);
+    console.log("house Kitchen", houseKitchen);
+
 
 
     // gör om listorna till object med label och value så att de passar i options
 
 
-const houseWaterOptions = houseWater.map(house_water =>({
-    label: house_water,
-    value: house_water,
-}))
+    const houseStairsOptions = houseStairs.map(houseStair =>({
+        label: houseStair,
+        value: houseStair,
+    }))
 
-const houseWifiOptions = houseWifi.map(house_wifi =>({
-label: house_wifi,
-value: house_wifi,
-}))
 
-const houseParkingOptions = houseParking.map(house_parking =>({
-    label: house_parking,
-    value:house_parking,
-}))
+    const houseKitchenOptions = houseWater.map(kitchen =>({
+        label: kitchen,
+        value: kitchen,
+    }))
+
+
+    const houseWaterOptions = houseWater.map(house_water =>({
+        label: house_water,
+        value: house_water,
+    }))
+     const houseRoomOptions = roomType.map(room =>({
+            label: room,
+            value: room,
+        }))
+
+
+
+    const houseWifiOptions = houseWifi.map(house_wifi =>({
+        label: house_wifi,
+        value: house_wifi,
+    }))
+
+    const houseParkingOptions = houseParking.map(house_parking =>({
+        label: house_parking,
+        value:house_parking,
+    }))
 
     const houseTransactionOptions = houseTransactions.map(house_transaction =>({
-    label: house_transaction,
-    value: house_transaction
-}))
-const houseCategoryOptions = houseCategory.map(category =>({
+        label: house_transaction,
+        value: house_transaction
+    }))
+    const houseCategoryOptions = houseCategory.map(category =>({
         label: category.name,
         value: category.name
     }))
+
+
+    //select category
+    const handleCategoryChange = (e)=>{
+        setSelectedCategory(e.target.value)
+        console.log("selectedCategory", e.target.value)
+    }
+
+
+    const handleHouseTransactionChange = (e)=>{
+        setHouseTransaction(e.target.value)
+        console.log("selectedHouseTransaction", e.target.value)
+    }
     //console.log("houseTypeOptions",houseTypeOptions)
 
     const changeHandler = (e) => {
@@ -86,7 +130,7 @@ const houseCategoryOptions = houseCategory.map(category =>({
                 images: [...files],
             }))
         }
-          else {
+        else {
             setHouse(prevState =>({
                 ...prevState,
                 [name]:value
@@ -96,16 +140,16 @@ const houseCategoryOptions = houseCategory.map(category =>({
     }
 
 
-  useEffect(() => {
-      const squareMeters = house.houseWidth * house.houseHeight;
-      setHouse(prevState =>({
-          ...prevState,
-          squareMeters: squareMeters
-      }))
+    useEffect(() => {
+        const squareMeters = house.houseWidth * house.houseHeight;
+        setHouse(prevState =>({
+            ...prevState,
+            squareMeters: squareMeters
+        }))
     }, [house.houseWidth, house.houseHeight]);
     const handleSubmit = async (e) => {
         e.preventDefault();
-      const calculateSquareMeters = house.houseWidth * house.houseHeight;
+        const calculateSquareMeters = house.houseWidth * house.houseHeight;
 
         const images = await Promise.all(house.images.map(async (image) => {
             const base64 = await convertImagebase64(image);
@@ -147,27 +191,31 @@ const houseCategoryOptions = houseCategory.map(category =>({
     return (
         <form onSubmit={handleSubmit} encType="multipart/form-data">
             <MainSelect
-            label={'Nuuca guriga'}
-            name="category"
-            id="category"
-            value={house.category.name}
-            options={houseCategoryOptions}
-            onChange={changeHandler}
+                label={'Nuuca guriga'}
+                name="category"
+                id="category"
+                value={house.category.name}
+                options={houseCategoryOptions}
+                onChange={handleCategoryChange}
 
             />
 
 
+            {
+                selectedCategory !== undefined && selectedCategory !== "Hotel" && (
+                    <MainSelect
+                        type="text"
+                        label={'Hawlaha guryaha'}
+                        name="houseTransactions"
+                        value={house.houseTransactions}
+                        placeholder={'houseTransactions'}
+                        options={houseTransactionOptions}
+                        onChange={handleHouseTransactionChange}
 
-  <MainSelect
-            type="text"
-            label={'Hawlaha guryaha'}
-            name="houseTransactions"
-            value={house.houseTransactions}
-            placeholder={'houseTransactions'}
-            options={houseTransactionOptions}
-            onChange={changeHandler}
+                    />
+                )
+            }
 
-        />
 
             <MainSelect
                 type="text"
@@ -179,39 +227,69 @@ const houseCategoryOptions = houseCategory.map(category =>({
                 onChange={changeHandler}
 
             />
+            {
+                selectedCategory === "Hotel" && (
+                    <>
+                        <MainSelect
+                            type="text"
+                            label={'Internet?'}
+                            name="houseWifi"
+                            value={house.houseWifi}
+                            placeholder={'houseWifi'}
+                            options={houseWifiOptions}
+                            onChange={changeHandler}
 
-    <MainSelect
-        type="text"
-        label={'Parking'}
-        name="houseParking"
-        value={house.houseParking}
-        placeholder={'houseParking'}
-        options={houseParkingOptions}
-        onChange={changeHandler}
+                        />
 
-    />
+                        <MainSelect
+                            type="text"
+                            label={'Parking'}
+                            name="houseParking"
+                            value={house.houseParking}
+                            placeholder={'houseParking'}
+                            options={houseParkingOptions}
+                            onChange={changeHandler}
 
-    <MainSelect
-        type="text"
-        label={'Internet?'}
-        name="houseWifi"
-        value={house.houseWifi}
-        placeholder={'houseWifi'}
-        options={houseWifiOptions}
-        onChange={changeHandler}
-
-    />
+                        />
 
 
-    <MainInput
-        type="date"
-        name="yearBuilt"
-        value={house.yearBuilt}
-        placeholder={'yearBuilt'}
-        label={"yearBuilt"}
-        onChange={changeHandler}
+               <MainSelect
+                type="text"
+                label={'Room type'}
+                name="roomType"
+                value={house.roomType}
+                placeholder={'roomType'}
+                options={houseRoomOptions}
+                onChange={changeHandler}
 
-    />
+            />
+                    </>
+                )
+            }
+            {
+                selectedCategory === "Dabaq" && (
+                    <MainSelect
+                        type="text"
+                        label={'Jaraan jaro'}
+                        name="houseStair"
+                        value={house.houseStair}
+                        placeholder={'houseStair'}
+                        options={houseStairsOptions}
+                        onChange={changeHandler}
+
+                    />
+                )
+            }
+
+            <MainInput
+                type="date"
+                name="yearBuilt"
+                value={house.yearBuilt}
+                placeholder={'yearBuilt'}
+                label={"yearBuilt"}
+                onChange={changeHandler}
+
+            />
             <MainInput
                 type="number"
                 name="bathrooms"
@@ -291,7 +369,7 @@ const houseCategoryOptions = houseCategory.map(category =>({
 
             />
 
-          {/*  <MainInput
+            {/*  <MainInput
                 type="file"
                 name="thumbnail"
                 placeholder={'thumbnail'}
@@ -300,28 +378,31 @@ const houseCategoryOptions = houseCategory.map(category =>({
 
             />*/}
 
-<MainInput
-        type="file"
-        name="images"
-        placeholder={'images'}
-        label={"Images"}
-        multiple
-        onChange={changeHandler}
+            <MainInput
+                type="file"
+                name="images"
+                placeholder={'images'}
+                label={"Images"}
+                multiple
+                onChange={changeHandler}
 
-    />
-    <MainTextArea cols={40}
-                  name="description"
-                  rows={10} placeholder={'Skiver lite beskrivning'}
-                  changeHandler={changeHandler}>
+            />
+            <MainTextArea cols={40}
+                          name="description"
+                          rows={10} placeholder={'Skiver lite beskrivning'}
+                          changeHandler={changeHandler}>
 
-    </MainTextArea>
+            </MainTextArea>
 
             <SaveButton
                 type={'submit'}
                 title={'Spara'}
                 textColor={'text-primary'}
                 backgroundColor={'btn btn-danger btn-md mt-3'}
-            ></SaveButton>        </form>
+            ></SaveButton>
+
+            <p>{selectedCategory}</p>
+        </form>
     );
 }
 
