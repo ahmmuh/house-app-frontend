@@ -36,6 +36,7 @@ function CreateHouse() {
         houseParking: "",
         category:"",
         houseStair:"",
+        houseKitchen:"",
         /*      location: {
                   latitude: 0,
                   longitude: 0
@@ -224,6 +225,17 @@ function CreateHouse() {
                 value={house.houseWater}
                 placeholder={'houseWater'}
                 options={houseWaterOptions}
+                onChange={changeHandler}
+
+            />
+
+            <MainSelect
+                type="text"
+                label={'Koshiin ama Jiko?'}
+                name="houseKitchen"
+                value={house.houseKitchen}
+                placeholder={'houseKitchen'}
+                options={houseKitchenOptions}
                 onChange={changeHandler}
 
             />
