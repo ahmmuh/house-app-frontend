@@ -7,6 +7,8 @@ import {createHouse} from "../backend/houseService";
 import {convertImagebase64} from "../utils/convertImagebase64";
 import SaveButton from "../components/SaveButton";
 import DashboardContext from "../context/DashboardContext";
+import RadioInput from "../components/RadioInput";
+import MainCard from "../components/MainCard";
 
 function CreateHouse() {
 
@@ -33,10 +35,23 @@ function CreateHouse() {
         roomType:"",
         // thumbnail:null,
         images: [],
-        houseParking: "",
         category:"",
         houseStair:"",
         houseKitchen:"",
+        //boolean
+        houseParking: false,
+        airportShuttle: false,
+        familyRooms: false,
+        restaurant: false,
+        nonSmokingRooms: false,
+        roomService: false,
+        frontDesk24hr: false,
+        teaCoffeeMaker:false,
+        breakfast:false,
+        terrace:false,
+        laundry:false,
+        elevator:false,
+        dailyHousekeeping: false,
         /*      location: {
                   latitude: 0,
                   longitude: 0
@@ -57,7 +72,7 @@ function CreateHouse() {
     //console.log("House houseParking", houseParking);
     //console.log("House water", houseWater);
     //console.log("houseType", houseType);
-   console.log("roomType", roomType);
+    console.log("roomType", roomType);
 
     console.log("house Stairs", houseStairs);
     console.log("house Kitchen", houseKitchen);
@@ -72,33 +87,33 @@ function CreateHouse() {
         value: houseStair,
     }))
 
+    /*
+        const houseKitchenOptions = houseWater.map(kitchen =>({
+            label: kitchen,
+            value: kitchen,
+        }))*/
 
-    const houseKitchenOptions = houseWater.map(kitchen =>({
-        label: kitchen,
-        value: kitchen,
+
+    /*  const houseWaterOptions = houseWater.map(house_water =>({
+          label: house_water,
+          value: house_water,
+      }))*/
+    const houseRoomOptions = roomType.map(room =>({
+        label: room,
+        value: room,
     }))
 
 
-    const houseWaterOptions = houseWater.map(house_water =>({
-        label: house_water,
-        value: house_water,
-    }))
-     const houseRoomOptions = roomType.map(room =>({
-            label: room,
-            value: room,
-        }))
 
-
-
-    const houseWifiOptions = houseWifi.map(house_wifi =>({
-        label: house_wifi,
-        value: house_wifi,
-    }))
-
-    const houseParkingOptions = houseParking.map(house_parking =>({
-        label: house_parking,
-        value:house_parking,
-    }))
+    /*  const houseWifiOptions = houseWifi.map(house_wifi =>({
+          label: house_wifi,
+          value: house_wifi,
+      }))
+  */
+    /*  const houseParkingOptions = houseParking.map(house_parking =>({
+          label: house_parking,
+          value:house_parking,
+      }))*/
 
     const houseTransactionOptions = houseTransactions.map(house_transaction =>({
         label: house_transaction,
@@ -124,7 +139,7 @@ function CreateHouse() {
     //console.log("houseTypeOptions",houseTypeOptions)
 
     const changeHandler = (e) => {
-        const {name,value,files} = e.target;
+        const {name,value,files, type, checked} = e.target;
         if (name === "images"){
             setHouse(prevState =>({
                 ...prevState,
@@ -134,7 +149,7 @@ function CreateHouse() {
         else {
             setHouse(prevState =>({
                 ...prevState,
-                [name]:value
+                [name]: type === 'checkbox'? checked: (type === 'radio' ? value === 'true': value ),
             }))
         }
 
@@ -145,9 +160,9 @@ function CreateHouse() {
         const squareMeters = house.houseWidth * house.houseHeight;
         setHouse(prevState =>({
             ...prevState,
-            squareMeters: squareMeters
+            squareMeters: squareMeters,
         }))
-    }, [house.houseWidth, house.houseHeight]);
+    }, [house]);
     const handleSubmit = async (e) => {
         e.preventDefault();
         const calculateSquareMeters = house.houseWidth * house.houseHeight;
@@ -190,198 +205,359 @@ function CreateHouse() {
     };
 
     return (
-        <form onSubmit={handleSubmit} encType="multipart/form-data">
-            <MainSelect
-                label={'Nuuca guriga'}
-                name="category"
-                id="category"
-                value={house.category.name}
-                options={houseCategoryOptions}
-                onChange={handleCategoryChange}
-
-            />
-
-
-            {
-                selectedCategory !== undefined && selectedCategory !== "Hotel" && (
+        <div className={'container'}>
+            <div className={'row'}>
+                <form onSubmit={handleSubmit} encType="multipart/form-data">
                     <MainSelect
-                        type="text"
-                        label={'Hawlaha guryaha'}
-                        name="houseTransactions"
-                        value={house.houseTransactions}
-                        placeholder={'houseTransactions'}
-                        options={houseTransactionOptions}
-                        onChange={handleHouseTransactionChange}
+                        label={'Nuuca guriga'}
+                        name="category"
+                        id="category"
+                        value={house.category.name}
+                        options={houseCategoryOptions}
+                        onChange={handleCategoryChange}
 
                     />
-                )
-            }
+
+                    {/*Hotel*/}
+                    <div>
+                        {
+                            selectedCategory !== undefined && selectedCategory !== "Hotel" && (
+                                <>
+                                    <MainSelect
+                                        type="text"
+                                        label={'Hawlaha guryaha'}
+                                        name="houseTransactions"
+                                        value={house.houseTransactions}
+                                        placeholder={'houseTransactions'}
+                                        options={houseTransactionOptions}
+                                        onChange={handleHouseTransactionChange}
+
+                                    />
+
+                                </>
+                            )
+                        }
 
 
-            <MainSelect
-                type="text"
-                label={'Biyo ma leyahay?'}
-                name="houseWater"
-                value={house.houseWater}
-                placeholder={'houseWater'}
-                options={houseWaterOptions}
-                onChange={changeHandler}
+                        {
+                            selectedCategory === "Hotel" && (
+                                <>
 
-            />
+                                    <MainSelect
+                                        type="text"
+                                        label={'Room type'}
+                                        name="roomType"
+                                        value={house.roomType}
+                                        placeholder={'roomType'}
+                                        options={houseRoomOptions}
+                                        onChange={changeHandler}
 
-            <MainSelect
-                type="text"
-                label={'Koshiin ama Jiko?'}
-                name="houseKitchen"
-                value={house.houseKitchen}
-                placeholder={'houseKitchen'}
-                options={houseKitchenOptions}
-                onChange={changeHandler}
+                                    />
+                                    <MainCard title={'Family Rooms'}>
+                                        <RadioInput
+                                            type={'radio'}
+                                            name={'familyRooms'}
+                                            value={'true'}
+                                            id={'familyRoomsYes'}
+                                            checked={house.familyRooms === true}
+                                            onChange={changeHandler}
+                                            label={'Yes'}
 
-            />
-            {
-                selectedCategory === "Hotel" && (
-                    <>
-                        <MainSelect
-                            type="text"
-                            label={'Internet?'}
-                            name="houseWifi"
-                            value={house.houseWifi}
-                            placeholder={'houseWifi'}
-                            options={houseWifiOptions}
-                            onChange={changeHandler}
+                                        />
 
-                        />
+                                        <RadioInput
+                                            type={'radio'}
+                                            name={'familyRooms'}
+                                            value={'false'}
+                                            id={'familyRoomsNo'}
+                                            checked={house.familyRooms === false}
+                                            onChange={changeHandler}
+                                            label={'No'}
 
-                        <MainSelect
-                            type="text"
-                            label={'Parking'}
-                            name="houseParking"
-                            value={house.houseParking}
-                            placeholder={'houseParking'}
-                            options={houseParkingOptions}
-                            onChange={changeHandler}
+                                        />
+                                    </MainCard>
 
-                        />
+                                    <MainCard title={'Airport transfer'}>
+                                        <RadioInput
+                                            type={'radio'}
+                                            name={'airportShuttle'}
+                                            value={'true'}
+                                            id={'airportShuttleYes'}
+                                            checked={house.airportShuttle === true}
+                                            onChange={changeHandler}
+                                            label={'Yes'}
+
+                                        />
+
+                                        <RadioInput
+                                            type={'radio'}
+                                            name={'airportShuttle'}
+                                            value={'false'}
+                                            id={'airportShuttleNo'}
+                                            checked={house.airportShuttle === false}
+                                            onChange={changeHandler}
+                                            label={'No'}
+
+                                        />
+
+                                    </MainCard>
+                                    <MainCard title={'Parking'}>
+                                        <RadioInput
+                                            type={'radio'}
+                                            name={'houseParking'}
+                                            value={'true'}
+                                            id={'parkingYes'}
+                                            checked={house.houseParking === true}
+                                            onChange={changeHandler}
+                                            label={'Yes'}
+
+                                        />
 
 
-               <MainSelect
-                type="text"
-                label={'Room type'}
-                name="roomType"
-                value={house.roomType}
-                placeholder={'roomType'}
-                options={houseRoomOptions}
-                onChange={changeHandler}
+                                        <RadioInput
+                                            style={{marginLeft: '10px'}}
+                                            type={'radio'}
+                                            name={'houseParking'}
+                                            value={'false'}
+                                            id={'parkingNo'}
+                                            checked={house.houseParking === false}
+                                            label={'No'}
+                                            onChange={changeHandler}
+                                        />
+                                    </MainCard>
 
-            />
-                    </>
-                )
-            }
-            {
-                selectedCategory === "Dabaq" && (
-                    <MainSelect
-                        type="text"
-                        label={'Jaraan jaro'}
-                        name="houseStair"
-                        value={house.houseStair}
-                        placeholder={'houseStair'}
-                        options={houseStairsOptions}
+                                    <MainCard title={'Room Service'}>
+
+                                        <RadioInput
+                                            type={'radio'}
+                                            name={'roomService'}
+                                            value={'true'}
+                                            id={'roomServiceYes'}
+                                            checked={house.roomService === true}
+                                            onChange={changeHandler}
+                                            label={'Yes'}
+
+                                        />
+
+
+                                        <RadioInput
+                                            type={'radio'}
+                                            name={'roomService'}
+                                            value={'false'}
+                                            id={'roomServiceNo'}
+                                            checked={house.roomService === false}
+                                            onChange={changeHandler}
+                                            label={'No'}
+
+                                        />
+
+                                    </MainCard>
+                                    <MainCard title={'Restaurant'}>
+                                        <RadioInput
+                                            type={'radio'}
+                                            name={'restaurant'}
+                                            value={'true'}
+                                            id={'RestaurantYes'}
+                                            checked={house.restaurant === true}
+                                            onChange={changeHandler}
+                                            label={'Yes'}
+
+                                        />
+
+
+                                        <RadioInput
+                                            type={'radio'}
+                                            name={'restaurant'}
+                                            value={'false'}
+                                            id={'RestaurantNo'}
+                                            checked={house.restaurant === false}
+                                            onChange={changeHandler}
+                                            label={'No'}
+
+                                        />
+                                    </MainCard>
+
+                                    <MainCard title={'Breakfast'}>
+                                        <RadioInput
+                                            type={'radio'}
+                                            name={'breakfast'}
+                                            value={'true'}
+                                            id={'breakfastYes'}
+                                            checked={house.breakfast === true}
+                                            onChange={changeHandler}
+                                            label={'Yes'}
+
+                                        />
+
+                                        <RadioInput
+                                            type={'radio'}
+                                            name={'breakfast'}
+                                            value={'false'}
+                                            id={'breakfastNo'}
+                                            checked={house.breakfast === false}
+                                            onChange={changeHandler}
+                                            label={'No'}
+
+                                        />
+
+
+                                    </MainCard>
+                                    <MainCard title={'Tea & Coffee Maker'}>
+                                        <RadioInput
+                                            type={'radio'}
+                                            name={'teaCoffeeMaker'}
+                                            value={'true'}
+                                            id={'teaCoffeeMakerYes'}
+                                            checked={house.teaCoffeeMaker === true}
+                                            onChange={changeHandler}
+                                            label={'Yes'}
+
+                                        />
+
+                                        <RadioInput
+                                            type={'radio'}
+                                            name={'teaCoffeeMaker'}
+                                            value={'false'}
+                                            id={'teaCoffeeMakerNo'}
+                                            checked={house.teaCoffeeMaker === false}
+                                            onChange={changeHandler}
+                                            label={'No'}
+
+                                        />
+                                    </MainCard>
+
+                                    <MainCard title={'Daily House keeping'}>
+                                        <RadioInput
+                                            type={'radio'}
+                                            name={'dailyHousekeeping'}
+                                            value={'true'}
+                                            id={'smokingRoomsYes'}
+                                            checked={house.dailyHousekeeping === true}
+                                            onChange={changeHandler}
+                                            label={'Yes'}
+
+                                        />
+
+                                        <RadioInput
+                                            type={'radio'}
+                                            name={'dailyHousekeeping'}
+                                            value={'false'}
+                                            id={'smokingRoomsNo'}
+                                            checked={house.dailyHousekeeping === false}
+                                            onChange={changeHandler}
+                                            label={'No'}
+                                        />
+                                    </MainCard>
+                                </>
+                            )
+                        }
+                    </div>
+
+                    {/*end hotel*/}
+
+                    {
+                        selectedCategory === "Dabaq" && (
+                            <MainSelect
+                                type="text"
+                                label={'Jaraan jaro'}
+                                name="houseStair"
+                                value={house.houseStair}
+                                placeholder={'houseStair'}
+                                options={houseStairsOptions}
+                                onChange={changeHandler}
+
+                            />
+                        )
+                    }
+
+                    <MainInput
+                        type="date"
+                        name="yearBuilt"
+                        value={house.yearBuilt}
+                        placeholder={'yearBuilt'}
+                        label={"yearBuilt"}
                         onChange={changeHandler}
 
                     />
-                )
-            }
+                    <MainInput
+                        type="number"
+                        name="bathrooms"
+                        value={house.bathrooms}
+                        placeholder={'bathrooms'}
+                        label={"Bathroom"}
+                        min={0}
+                        onChange={changeHandler}
 
-            <MainInput
-                type="date"
-                name="yearBuilt"
-                value={house.yearBuilt}
-                placeholder={'yearBuilt'}
-                label={"yearBuilt"}
-                onChange={changeHandler}
-
-            />
-            <MainInput
-                type="number"
-                name="bathrooms"
-                value={house.bathrooms}
-                placeholder={'bathrooms'}
-                label={"Bathroom"}
-                min={0}
-                onChange={changeHandler}
-
-            />
+                    />
 
 
+                    <MainInput
+                        type="number"
+                        name="price"
+                        value={house.price}
+                        placeholder={'Price'}
+                        label={"Price"}
+                        min={0}
+                        onChange={changeHandler}
 
-            <MainInput
-                type="number"
-                name="price"
-                value={house.price}
-                placeholder={'Price'}
-                label={"Price"}
-                min={0}
-                onChange={changeHandler}
+                    />
 
-            />
+                    <MainInput
+                        type="number"
+                        name="rooms"
+                        value={house.rooms}
+                        placeholder={'Rooms'}
+                        label={"Rooms"}
+                        min={1}
+                        onChange={changeHandler}
 
-            <MainInput
-                type="number"
-                name="rooms"
-                value={house.rooms}
-                placeholder={'Rooms'}
-                label={"Rooms"}
-                min={1}
-                onChange={changeHandler}
+                    />
 
-            />
+                    <MainInput
+                        type="number"
+                        name="houseWidth"
+                        value={house.houseWidth}
+                        placeholder={'houseWidth'}
+                        label={"Ballaca guriga"}
+                        min={0}
+                        onChange={changeHandler}
 
-            <MainInput
-                type="number"
-                name="houseWidth"
-                value={house.houseWidth}
-                placeholder={'houseWidth'}
-                label={"Ballaca guriga"}
-                min={0}
-                onChange={changeHandler}
-
-            />
+                    />
 
 
-            <MainInput
-                type="number"
-                name="houseHeight"
-                value={house.houseHeight}
-                placeholder={'houseHeight'}
-                label={"Dhererka guriga"}
-                min={0}
-                onChange={changeHandler}
+                    <MainInput
+                        type="number"
+                        name="houseHeight"
+                        value={house.houseHeight}
+                        placeholder={'houseHeight'}
+                        label={"Dhererka guriga"}
+                        min={0}
+                        onChange={changeHandler}
 
-            />
-            <MainInput
-                type="number"
-                name="squareMeters"
-                value={house.squareMeters}
-                placeholder={'SquareMeters'}
-                label={"Laba jibaar "}
-                disabled
-                onChange={changeHandler}
+                    />
+                    <MainInput
+                        type="number"
+                        name="squareMeters"
+                        value={house.squareMeters}
+                        placeholder={'SquareMeters'}
+                        label={"Laba jibaar "}
+                        disabled
+                        onChange={changeHandler}
 
-            />
+                    />
 
-            <MainInput
-                type="number"
-                name="toilets"
-                value={house.toilets}
-                placeholder={'Toilets'}
-                label={"Toilets"}
-                min={1}
-                onChange={changeHandler}
+                    <MainInput
+                        type="number"
+                        name="toilets"
+                        value={house.toilets}
+                        placeholder={'Toilets'}
+                        label={"Toilets"}
+                        min={1}
+                        onChange={changeHandler}
 
-            />
+                    />
 
-            {/*  <MainInput
+                    {/*  <MainInput
                 type="file"
                 name="thumbnail"
                 placeholder={'thumbnail'}
@@ -390,31 +566,34 @@ function CreateHouse() {
 
             />*/}
 
-            <MainInput
-                type="file"
-                name="images"
-                placeholder={'images'}
-                label={"Images"}
-                multiple
-                onChange={changeHandler}
+                    <MainInput
+                        type="file"
+                        name="images"
+                        placeholder={'images'}
+                        label={"Images"}
+                        multiple
+                        onChange={changeHandler}
 
-            />
-            <MainTextArea cols={40}
-                          name="description"
-                          rows={10} placeholder={'Skiver lite beskrivning'}
-                          changeHandler={changeHandler}>
+                    />
+                    <MainTextArea cols={40}
+                                  name="description"
+                                  rows={10} placeholder={'Skiver lite beskrivning'}
+                                  changeHandler={changeHandler}>
 
-            </MainTextArea>
+                    </MainTextArea>
 
-            <SaveButton
-                type={'submit'}
-                title={'Spara'}
-                textColor={'text-primary'}
-                backgroundColor={'btn btn-danger btn-md mt-3'}
-            ></SaveButton>
+                    <SaveButton
+                        type={'submit'}
+                        title={'Spara'}
+                        textColor={'text-primary'}
+                        backgroundColor={'btn btn-danger btn-md mt-3'}
+                    ></SaveButton>
 
-            <p>{selectedCategory}</p>
-        </form>
+                    <p>{selectedCategory}</p>
+                </form>
+
+            </div>
+        </div>
     );
 }
 
