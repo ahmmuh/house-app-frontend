@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import 'bootstrap/dist/css/bootstrap.css';
+import 'react-calendar/dist/Calendar.css';
 import './index.css';
 import App from './App';
 import {createBrowserRouter, RouterProvider} from "react-router-dom";

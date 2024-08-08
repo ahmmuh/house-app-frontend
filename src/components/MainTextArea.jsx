@@ -9,10 +9,13 @@ function MainTextArea({
     ...props
                       }) {
     return (
-       <textarea className={'form-control'} cols={cols}
-                 rows={rows}
-                 onChange={changeHandler}
-                 {...props}>
+       <textarea
+           name={name}
+           className={'form-control'}
+           cols={cols}
+             rows={rows}
+             onChange={changeHandler}
+             {...props}>
 
        </textarea>
     );

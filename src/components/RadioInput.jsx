@@ -10,6 +10,8 @@ function RadioInput({
     checked, label,
     ...props
                     }) {
+
+    console.log("Label", label)
     return (
         <div >
             <input
@@ -19,7 +21,7 @@ function RadioInput({
                 checked={checked}
                 onChange={changeHandler}
                 className={className} {...props}/>
-            <label style={{padding: '.5rem'}} htmlFor={id}>{label}</label>
+            <label style={{padding: '.3rem'}} htmlFor={id}>{label}</label>
         </div>
 
     );
