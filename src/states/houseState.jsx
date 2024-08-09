@@ -1,6 +1,6 @@
 // houseState.js
 import { useState } from 'react';
-import DatePicker from "../calender/DatePicker";
+import DatePicker from "../calender/InputDatePicker";
 
 
 const useHouseState = () => {
@@ -37,6 +37,10 @@ const useHouseState = () => {
         houseWater: false,
         privateBathroom: false,
         yearBuilt: new Date().getFullYear(),
+        fromStartDate: new Date(),
+        toEndDate: new Date(),
+        children: 0,
+        adults:1,
     });
 
     return [house, setHouse];

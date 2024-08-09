@@ -25,6 +25,10 @@ function Menu(props) {
                                 <Link to={'/dashboard'} className="nav-link">Dashboard
                                 </Link>
                             </li>
+                            <li className={'nav-item'}>
+                                <Link to={'/dashboard/create'} className="nav-link">Create house
+                                </Link>
+                            </li>
 
                         </ul>
                     </div>

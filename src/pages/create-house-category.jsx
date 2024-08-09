@@ -1,6 +1,6 @@
 import React,{useState} from 'react';
-import MainInput from "../components/MainInput";
-import MainTextArea from "../components/MainTextArea";
+import MainInput from "../components/reusableInputs/MainInput";
+import MainTextArea from "../components/reusableInputs/MainTextArea";
 import SaveButton from "../components/SaveButton";
 import {createHouseCategory} from "../backend/house-categoryService";
 

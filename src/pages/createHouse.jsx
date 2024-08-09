@@ -1,20 +1,22 @@
 import React, {useContext, useEffect, useState,} from 'react';
-import MainInput from "../components/MainInput";
-import MainSelect from "../components/MainSelect";
+import MainInput from "../components/reusableInputs/MainInput";
+import MainSelect from "../components/reusableInputs/MainSelect";
 import HouseEnumContext from "../context/HouseEnumContext";
-import MainTextArea from "../components/MainTextArea";
+import MainTextArea from "../components/reusableInputs/MainTextArea";
 import {createHouse} from "../backend/houseService";
 import {convertImagebase64} from "../utils/convertImagebase64";
 import SaveButton from "../components/SaveButton";
 import DashboardContext from "../context/DashboardContext";
-import RadioInput from "../components/RadioInput";
-import MainCard from "../components/MainCard";
+import RadioInput from "../components/reusableInputs/RadioInput";
+import MainCard from "../components/reusableInputs/MainCard";
 import useHouseState from "../states/houseState";
-import DatePicker from "../calender/DatePicker";
+import DatePicker from "../calender/InputDatePicker";
+import GuestInputCounter from "../components/reusableInputs/GuestInputCounter";
+import BookingForm from "../components/BookingForm";
 function CreateHouse() {
 
     const houseData = useContext(HouseEnumContext);
-    console.log("ALl house data", houseData)
+    //console.log("ALl house data", houseData)
     const {houseCategory} = useContext(DashboardContext)
     const [selectedCategory,setSelectedCategory] = useState('');
     const [selectHouseTransaction, setHouseTransaction] = useState('')
@@ -29,14 +31,14 @@ function CreateHouse() {
         houseKitchen,
         houseParking} = houseData
     // console.log("House wifi", houseWifi);
-    console.log("House transactions", houseTransactions);
+    //console.log("House transactions", houseTransactions);
     //console.log("House houseParking", houseParking);
     //console.log("House water", houseWater);
     //console.log("houseType", houseType);
-    console.log("roomType", roomType);
+    //console.log("roomType", roomType);
 
-    console.log("house Stairs", houseStairs);
-    console.log("house Kitchen", houseKitchen);
+    //console.log("house Stairs", houseStairs);
+    //console.log("house Kitchen", houseKitchen);
 
 
 
@@ -104,6 +106,8 @@ function CreateHouse() {
         if (name === "images"){
             setHouse(prevState =>({
                 ...prevState,
+                fromStartDate: house.fromStartDate,
+                toEndDate: house.toEndDate,
                 images: [...files],
             }))
         }
@@ -115,6 +119,7 @@ function CreateHouse() {
         }
 
     }
+    console.log("House date", house)
 
 
     useEffect(() => {
@@ -143,17 +148,37 @@ function CreateHouse() {
             bathrooms: house.bathrooms,
             yearBuilt: house.yearBuilt,
             squareMeters:house.houseWidth * house.houseHeight,
-            price:house.price,
-            rooms: house.rooms,
-            houseWifi:house.houseWifi,
-            houseWater: house.houseWater,
-            toilets: house.toilets,
-            houseParking: house.houseParking,
             houseTransactions: house.houseTransactions,
             houseWidth: house.houseWidth,
             houseHeight: house.houseHeight,
-            images: images,
-            category: house.category
+            price: house.price,
+            rooms: house.rooms,
+            toilets: house.toilets,
+            roomType: house.roomType,
+            images: house.images,
+            category: house.category,
+            houseStair: house.houseStair,
+            houseKitchen: house.houseKitchen,
+            houseParking: house.houseParking,
+            airportShuttle: house.airportShuttle,
+            familyRooms: house.familyRooms,
+            restaurant: house.restaurant,
+            nonSmokingRooms: house.nonSmokingRooms,
+            roomService: house.roomService,
+            frontDesk24hr: house.frontDesk24hr,
+            teaCoffeeMaker: house.teaCoffeeMaker,
+            breakfast: house.breakfast,
+            terrace: house.terrace,
+            laundry: house.laundry,
+            elevator: house.elevator,
+            dailyHousekeeping: house.dailyHousekeeping,
+            houseWifi: house.houseWifi,
+            houseWater: house.houseWater,
+            privateBathroom: house.privateBathroom,
+            fromStartDate: house.fromStartDate,
+            toEndDate: house.toEndDate,
+            children: house.children,
+            adults:house.adults,
         }
         setHouse(prevState => ({
             ...prevState,
@@ -184,6 +209,68 @@ function CreateHouse() {
                             <>
                                 {/*Hotel*/}
                                 <div>
+                                    {
+                                        ( selectedCategory === "Apartment" || selectedCategory === "Hotel") && (
+                                            <>
+                                                <MainCard title={'Guest Information'}>
+                                                    <BookingForm title={'Incheckning'}>
+                                                        <DatePicker
+                                                            type="date"
+                                                            name={'fromStartDate'}
+                                                            selectedDate={house.fromStartDate}
+                                                            id={'fromStartDate'}
+                                                            changeHandler={changeHandler}
+
+                                                        /> <i className="fa-solid fa-calendar-days"></i>
+                                                    </BookingForm>
+                                                    <BookingForm title={'Utcheckning'}>
+                                                        <DatePicker
+                                                            type='date'
+                                                            name={'toEndDate'}
+                                                            id={'toEndDate'}
+                                                            selectedDate={house.toEndDate}
+                                                            changeHandler={changeHandler}
+
+                                                        /> <i className="fa-solid fa-calendar-days"></i>
+                                                    </BookingForm>
+                                                    <BookingForm title={'Meeqa qof oo waa weeyn?'}>
+                                                        <GuestInputCounter type={'number'} name={'adults'} value={house.adults}
+                                                                           changeHandler={changeHandler}/>
+                                                        <i className="fa-solid fa-person" style={{marginLeft: '.2rem'}}></i>
+                                                    </BookingForm>
+                                                    <BookingForm title={'Meeqa caruur ah?'}>
+                                                        <GuestInputCounter type={'number'} name={'children'} value={house.children}
+                                                                           onChange={changeHandler}/>
+                                                        <i className="fa-solid fa-children" style={{marginLeft: '.2rem'}}></i>
+                                                    </BookingForm>
+                                                </MainCard>
+                                                <MainCard title={'Wifi'}>
+                                                    <RadioInput
+                                                        type={'radio'}
+                                                        name={'houseWifi'}
+                                                        value={'true'}
+                                                        id={'houseWifiYes'}
+                                                        checked={house.houseWifi === true}
+                                                        onChange={changeHandler}
+                                                        label={'Yes'}
+
+                                                    />
+
+                                                    <RadioInput
+                                                        type={'radio'}
+                                                        name={'houseWifi'}
+                                                        value={'false'}
+                                                        id={'houseWifiNo'}
+                                                        checked={house.houseWifi === false}
+                                                        onChange={changeHandler}
+                                                        label={'No'}
+
+                                                    />
+                                                </MainCard>
+                                            </>
+                                        )
+                                    }
+
                                     {
                                         selectedCategory !== undefined && selectedCategory !== "Hotel" && (
                                             <>
@@ -241,6 +328,7 @@ function CreateHouse() {
                                                     />
                                                 </MainCard>
 
+
                                                 <MainCard title={'Airport transfer'}>
                                                     <RadioInput
                                                         type={'radio'}
@@ -274,7 +362,7 @@ function CreateHouse() {
                                                         name={'frontDesk24hr'}
                                                         value={'true'}
                                                         id={'frontDesk24hrYes'}
-                                                        checked={house.airportShuttle === true}
+                                                        checked={house.frontDesk24hr === true}
                                                         onChange={changeHandler}
                                                         label={'Yes'}
 
@@ -286,43 +374,12 @@ function CreateHouse() {
                                                         name={'frontDesk24hr'}
                                                         value={'false'}
                                                         id={'frontDesk24hrNo'}
-                                                        checked={house.airportShuttle === false}
+                                                        checked={house.frontDesk24hr === false}
                                                         onChange={changeHandler}
                                                         label={'No'}
 
                                                     />
                                                 </MainCard>
-
-                                                {
-                                                    selectedCategory === "Apartment" || selectedCategory === "Hotel" && (
-                                                        <>
-                                                            <MainCard title={'Wifi'}>
-                                                                <RadioInput
-                                                                    type={'radio'}
-                                                                    name={'houseWifi'}
-                                                                    value={'true'}
-                                                                    id={'houseWifiYes'}
-                                                                    checked={house.houseWifi === true}
-                                                                    onChange={changeHandler}
-                                                                    label={'Yes'}
-
-                                                                />
-
-                                                                <RadioInput
-                                                                    type={'radio'}
-                                                                    name={'houseWifi'}
-                                                                    value={'false'}
-                                                                    id={'houseWifiNo'}
-                                                                    checked={house.houseWifi === false}
-                                                                    onChange={changeHandler}
-                                                                    label={'No'}
-
-                                                                />
-                                                            </MainCard>
-                                                        </>
-                                                    )
-                                                }
-
                                                 <MainCard title={'Private Bath Room'}>
                                                     <RadioInput
                                                         type={'radio'}
@@ -584,11 +641,7 @@ function CreateHouse() {
                                 {
                                     selectedCategory !== "Hotel" && (
                                         <>
-                                           <MainCard title={'Waqtigi la dhisay'}>
-                                               <DatePicker name={'yearBuilt'}
-                                                           value={house.yearBuilt}
-                                                           onChange={changeHandler} />
-                                           </MainCard>
+
                                         </>
                                     )
                                 }

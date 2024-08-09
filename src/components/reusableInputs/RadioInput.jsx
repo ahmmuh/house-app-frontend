@@ -11,7 +11,6 @@ function RadioInput({
     ...props
                     }) {
 
-    console.log("Label", label)
     return (
         <div >
             <input

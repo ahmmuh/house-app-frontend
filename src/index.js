@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import 'bootstrap/dist/css/bootstrap.css';
-import 'react-calendar/dist/Calendar.css';
 import './index.css';
 import App from './App';
+import "react-datepicker/dist/react-datepicker.css";
+import "@fortawesome/fontawesome-free/css/all.min.css"
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import Dashboard from "./pages/dashboard";
 import CreateHouse from "./pages/createHouse";
