@@ -11,7 +11,7 @@ import RadioInput from "../components/reusableInputs/RadioInput";
 import MainCard from "../components/reusableInputs/MainCard";
 import useHouseState from "../states/houseState";
 import {checkSelectedCategory} from "../utils/checkSelectedCategory";
-import HotelBookingForm from "../components/reusableInputs/HotelBookingForm";
+import HotelBookingForm from "../components/hotel/HotelBookingForm";
 function CreateHouse() {
 
     const houseData = useContext(HouseEnumContext);
@@ -196,7 +196,6 @@ console.log("houseCategoryOptions", houseCategoryOptions)
     return (
         <div className={'container'}>
             <div className={'row'}>
-                <form onSubmit={handleSubmit} encType="multipart/form-data">
                     <MainSelect
                         label={'Nuuca guriga'}
                         name="category"
@@ -343,27 +342,7 @@ console.log("houseCategoryOptions", houseCategoryOptions)
                                         </>
                                     )
                                 }
-                                <MainCard title={'Water'}>
-                                    <RadioInput
-                                        type={'radio'}
-                                        name={'houseWater'}
-                                        value={'true'}
-                                        id={'houseWaterYes'}
-                                        checked={house.houseWater === true}
-                                        onChange={changeHandler}
-                                        label={'Yes'}
-                                    />
 
-                                    <RadioInput
-                                        type={'radio'}
-                                        name={'houseWater'}
-                                        value={'false'}
-                                        id={'houseWaterNo'}
-                                        checked={house.houseWater === false}
-                                        onChange={changeHandler}
-                                        label={'No'}
-                                    />
-                                </MainCard>
                                 {
                                     selectedCategory === "Dabaq" && (
                                        <>
@@ -404,81 +383,18 @@ console.log("houseCategoryOptions", houseCategoryOptions)
                                 }
 
 
-                                <MainInput
-                                    type="number"
-                                    name="price"
-                                    value={house.price}
-                                    placeholder={'Price'}
-                                    label={"Qiimaha"}
-                                    min={0}
-                                    onChange={changeHandler}
 
-                                />
-                                <MainCard title={'Cabirka guriga'}>
-                                    <MainInput
-                                        type="number"
-                                        name="houseWidth"
-                                        value={house.houseWidth}
-                                        placeholder={'houseWidth'}
-                                        label={"Ballaca guriga"}
-                                        min={0}
-                                        onChange={changeHandler}
-
-                                    />
-
-
-                                    <MainInput
-                                        type="number"
-                                        name="houseHeight"
-                                        value={house.houseHeight}
-                                        placeholder={'houseHeight'}
-                                        label={"Dhererka guriga"}
-                                        min={0}
-                                        onChange={changeHandler}
-
-                                    />
-                                    <MainInput
-                                        type="number"
-                                        name="squareMeters"
-                                        value={`${house.squareMeters}`}
-                                        label={`Waa`}
-                                        disabled
-                                        onChange={changeHandler}
-
-                                    />
-
-                                </MainCard>
-
-
-                                <MainInput
-                                    type="file"
-                                    name="images"
-                                    placeholder={'images'}
-                                    label={"Images"}
-                                    multiple
-                                    onChange={changeHandler}
-
-                                />
-                                <MainTextArea
-                                              name="description"
-                                              cols={40}
-                                              rows={10} placeholder={'Skiver lite beskrivning'}
-                                              changeHandler={changeHandler}>
-
-                                </MainTextArea>
-
-                                <SaveButton
+                               {/* <SaveButton
                                     type={'submit'}
                                     title={'Spara'}
                                     textColor={'text-primary'}
                                     backgroundColor={'btn btn-danger btn-md mt-3'}
-                                ></SaveButton>
+                                ></SaveButton>*/}
 
                             </>
                         )
                     }
                     <p>{selectedCategory}</p>
-                </form>
 
             </div>
         </div>

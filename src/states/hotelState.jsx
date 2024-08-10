@@ -2,6 +2,7 @@ import {useState} from 'react';
 
 const useHotelState = (props) => {
     const [hotel, setHotel] = useState({
+        hotelName:"",
         roomType:"",
         price:0,
         description:"",
