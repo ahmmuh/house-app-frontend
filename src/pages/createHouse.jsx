@@ -13,6 +13,7 @@ import useHouseState from "../states/houseState";
 import DatePicker from "../calender/InputDatePicker";
 import GuestInputCounter from "../components/reusableInputs/GuestInputCounter";
 import BookingForm from "../components/BookingForm";
+import {checkSelectedCategory} from "../utils/checkSelectedCategory";
 function CreateHouse() {
 
     const houseData = useContext(HouseEnumContext);
@@ -84,10 +85,11 @@ function CreateHouse() {
     }))
     const houseCategoryOptions = houseCategory.map(category =>({
         label: category.name,
-        value: category.name
+        value: category.name,
+        id: category._id,
     }))
 
-
+console.log("houseCategoryOptions", houseCategoryOptions)
     //select category
     const handleCategoryChange = (e)=>{
         setSelectedCategory(e.target.value)
@@ -106,20 +108,20 @@ function CreateHouse() {
         if (name === "images"){
             setHouse(prevState =>({
                 ...prevState,
-                fromStartDate: house.fromStartDate,
-                toEndDate: house.toEndDate,
                 images: [...files],
             }))
         }
         else {
             setHouse(prevState =>({
                 ...prevState,
+                fromStartDate: house.fromStartDate,
+                toEndDate: house.toEndDate,
                 [name]: type === 'checkbox'? checked: (type === 'radio' ? value === 'true': value ),
             }))
         }
-
+    console.log(value)
     }
-    console.log("House date", house)
+    //console.log("House date", house)
 
 
     useEffect(() => {
@@ -155,7 +157,7 @@ function CreateHouse() {
             rooms: house.rooms,
             toilets: house.toilets,
             roomType: house.roomType,
-            images: house.images,
+            images: images,
             category: house.category,
             houseStair: house.houseStair,
             houseKitchen: house.houseKitchen,
@@ -179,16 +181,19 @@ function CreateHouse() {
             toEndDate: house.toEndDate,
             children: house.children,
             adults:house.adults,
+
         }
         setHouse(prevState => ({
             ...prevState,
             squareMeters: calculateSquareMeters
         }));
-
+       checkSelectedCategory(selectedCategory, house)
         createHouse(newHouse).then(result => result);
         console.log("New house", newHouse)
 
     };
+    // tar bort visa inmatningsfälts valuse
+    // check selected Category
 
     return (
         <div className={'container'}>
@@ -272,7 +277,7 @@ function CreateHouse() {
                                     }
 
                                     {
-                                        selectedCategory !== undefined && selectedCategory !== "Hotel" && (
+                                        house !== undefined && house !== "Hotel" && (
                                             <>
                                                 <MainSelect
                                                     type="text"
@@ -296,7 +301,7 @@ function CreateHouse() {
 
                                                 <MainSelect
                                                     type="text"
-                                                    label={'Room type'}
+                                                    label={'BookedRoom type'}
                                                     name="roomType"
                                                     value={house.roomType}
                                                     placeholder={'roomType'}
@@ -380,7 +385,8 @@ function CreateHouse() {
 
                                                     />
                                                 </MainCard>
-                                                <MainCard title={'Private Bath Room'}>
+                                                <MainCard title={'Private Bath BookedRoom'}>
+                                                    <i className="fa-solid fa-shower"></i>
                                                     <RadioInput
                                                         type={'radio'}
                                                         name={'privateBathroom'}
@@ -401,6 +407,7 @@ function CreateHouse() {
                                                         label={'No'}
 
                                                     />
+
                                                 </MainCard>
                                                 <MainCard title={'Parking'}>
                                                     <RadioInput
@@ -427,7 +434,7 @@ function CreateHouse() {
                                                     />
                                                 </MainCard>
 
-                                                <MainCard title={'Room Service'}>
+                                                <MainCard title={'BookedRoom Service'}>
 
                                                     <RadioInput
                                                         type={'radio'}
@@ -562,6 +569,7 @@ function CreateHouse() {
                                     selectedCategory === "Apartment" && (
                                         <>
                                             <MainCard title={'Apartment'}>
+                                                <i className="fa-solid fa-restroom"></i>
                                                 <MainInput
                                                     type="number"
                                                     name="toilets"
@@ -572,7 +580,7 @@ function CreateHouse() {
                                                     onChange={changeHandler}
 
                                                 />
-
+                                                <i className="fa-solid fa-shower"></i>
                                                 <MainInput
                                                     type="number"
                                                     name="bathrooms"
@@ -624,7 +632,7 @@ function CreateHouse() {
 
                                                 <RadioInput
                                                     type={'radio'}
-                                                    name={'laundry'}
+                                                    name={'houseKitchen'}
                                                     value={'false'}
                                                     id={'houseKitchenNo'}
                                                     checked={house.houseKitchen === false}

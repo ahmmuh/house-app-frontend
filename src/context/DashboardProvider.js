@@ -11,7 +11,7 @@ function DashboardProvider({children}) {
     const fetchHouseCategories = async () => {
         const houseCategories = await getAllHouseCategory();
         setHouseCategory(houseCategories);
-        console.log("houseCategories", houseCategories);
+        //console.log("houseCategories", houseCategories);
     }
 
 
@@ -24,7 +24,7 @@ function DashboardProvider({children}) {
         fetchHouses().then(houses =>{})
         fetchHouseCategories().then(categories =>{})
     },[])
-    console.log("All Houses ", houses)
+    //console.log("All Houses ", houses)
     return (
        <DashboardContext.Provider value={{
            houses,

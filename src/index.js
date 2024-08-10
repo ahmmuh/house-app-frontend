@@ -11,6 +11,8 @@ import CreateHouse from "./pages/createHouse";
 import Content from "./pages/content";
 import NotFound from "./pages/notFound";
 import CreateHouseCategory from "./pages/create-house-category";
+import RoomList from "./pages/RoomList";
+import BookedRoom from "./pages/BookedRoom";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const router = createBrowserRouter([
@@ -25,6 +27,14 @@ const router = createBrowserRouter([
                     {
                         path: "create",
                         element: <CreateHouse />,
+                    },
+                    {
+                        path: "roomList",
+                        element: <RoomList/>,
+                    },
+                    {
+                        path: "roomList/:id",
+                        element: <BookedRoom/>,
                     },
                     {
                         path: "createCategory",

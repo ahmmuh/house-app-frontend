@@ -1,6 +1,5 @@
 // houseState.js
 import { useState } from 'react';
-import DatePicker from "../calender/InputDatePicker";
 
 
 const useHouseState = () => {
@@ -19,7 +18,7 @@ const useHouseState = () => {
         images: [],
         category: "",
         houseStair: "",
-        houseKitchen: "",
+        houseKitchen: false,
         houseParking: false,
         airportShuttle: false,
         familyRooms: false,
