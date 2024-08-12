@@ -1,18 +1,18 @@
 import React, {useContext, useEffect, useState,} from 'react';
-import MainInput from "../components/reusableInputs/MainInput";
-import MainSelect from "../components/reusableInputs/MainSelect";
-import HouseEnumContext from "../context/HouseEnumContext";
-import MainTextArea from "../components/reusableInputs/MainTextArea";
-import {createHouse} from "../backend/houseService";
-import {convertImagebase64} from "../utils/convertImagebase64";
-import SaveButton from "../components/SaveButton";
-import DashboardContext from "../context/DashboardContext";
-import RadioInput from "../components/reusableInputs/RadioInput";
-import MainCard from "../components/reusableInputs/MainCard";
-import useHouseState from "../states/houseState";
-import {checkSelectedCategory} from "../utils/checkSelectedCategory";
-import HotelBookingForm from "../components/hotel/HotelBookingForm";
-function CreateHouse() {
+import MainInput from "../../components/reusableInputs/MainInput";
+import MainSelect from "../../components/reusableInputs/MainSelect";
+import HouseEnumContext from "../../context/HouseEnumContext";
+import MainTextArea from "../../components/reusableInputs/MainTextArea";
+import {createHouse} from "../../backend/houseService";
+import {convertImagebase64} from "../../utils/convertImagebase64";
+import SaveButton from "../../components/SaveButton";
+import DashboardContext from "../../context/DashboardContext";
+import RadioInput from "../../components/reusableInputs/RadioInput";
+import MainCard from "../../components/reusableInputs/MainCard";
+import useHouseState from "../../states/houseState";
+import {checkSelectedCategory} from "../../utils/checkSelectedCategory";
+import CreateHotel from "../hotel/createHotel";
+function CategoryFormContainer() {
 
     const houseData = useContext(HouseEnumContext);
     //console.log("ALl house data", houseData)
@@ -207,22 +207,15 @@ console.log("houseCategoryOptions", houseCategoryOptions)
                     />
 
                     {
-                        selectedCategory  !== "" && (
+                        (selectedCategory  !== "") && selectedCategory === "Hotel" && (
                             <>
                                 {/*Hotel*/}
                                 <div>
-                                    {
-                                         selectedCategory === "Hotel" && (
-                                            <>
                                                 <MainCard title={'Guest Information'}>
-                                                <HotelBookingForm />
+                                                <CreateHotel selectedCategory={selectedCategory} />
                                                 </MainCard>
 
-                                            </>
-                                        )
-                                    }
-
-                                    {
+                                   {/* {
                                         house !== undefined && house !== "Hotel" && (
                                             <>
                                                 <MainSelect
@@ -238,16 +231,9 @@ console.log("houseCategoryOptions", houseCategoryOptions)
 
                                             </>
                                         )
-                                    }
+                                    }*/}
 
 
-                                    {
-                                        selectedCategory === "Hotel" && (
-                                            <>
-
-                                             </>
-                                        )
-                                    }
                                 </div>
 
                                 {/*end hotel*/}
@@ -256,81 +242,7 @@ console.log("houseCategoryOptions", houseCategoryOptions)
                                 {
 
                                     selectedCategory === "Apartment" && (
-                                        <>
-                                            <MainCard title={'Apartment'}>
-                                                <i className="fa-solid fa-restroom"></i>
-                                                <MainInput
-                                                    type="number"
-                                                    name="toilets"
-                                                    value={house.toilets}
-                                                    placeholder={'Toilets'}
-                                                    label={"Toilets"}
-                                                    min={1}
-                                                    onChange={changeHandler}
-
-                                                />
-                                                <i className="fa-solid fa-shower"></i>
-                                                <MainInput
-                                                    type="number"
-                                                    name="bathrooms"
-                                                    value={house.bathrooms}
-                                                    placeholder={'bathrooms'}
-                                                    label={"Bathroom"}
-                                                    min={0}
-                                                    onChange={changeHandler}
-
-                                                />
-
-                                            </MainCard>
-                                            <MainCard title={'Mashiinka dharka lagu dhaqo'}>
-                                                <RadioInput
-                                                    type={'radio'}
-                                                    name={'laundry'}
-                                                    value={'true'}
-                                                    id={'laundryYes'}
-                                                    checked={house.laundry === true}
-                                                    onChange={changeHandler}
-                                                    label={'Yes'}
-
-                                                />
-
-                                                <RadioInput
-                                                    type={'radio'}
-                                                    name={'laundry'}
-                                                    value={'false'}
-                                                    id={'laundryNo'}
-                                                    checked={house.houseWifi === false}
-                                                    onChange={changeHandler}
-                                                    label={'No'}
-
-                                                />
-                                            </MainCard>
-
-                                            <MainCard title={'Jiko / Koshiin'}>
-
-                                                <RadioInput
-                                                    type={'radio'}
-                                                    name={'houseKitchen'}
-                                                    value={'true'}
-                                                    id={'laundryYes'}
-                                                    checked={house.houseKitchen === true}
-                                                    onChange={changeHandler}
-                                                    label={'Yes'}
-
-                                                />
-
-                                                <RadioInput
-                                                    type={'radio'}
-                                                    name={'houseKitchen'}
-                                                    value={'false'}
-                                                    id={'houseKitchenNo'}
-                                                    checked={house.houseKitchen === false}
-                                                    onChange={changeHandler}
-                                                    label={'No'}
-
-                                                />
-                                            </MainCard>
-                                        </>
+                                       <>Apartment</>
                                     )
                                 }
 
@@ -343,7 +255,7 @@ console.log("houseCategoryOptions", houseCategoryOptions)
                                     )
                                 }
 
-                                {
+                               {/* {
                                     selectedCategory === "Dabaq" && (
                                        <>
                                            <MainSelect
@@ -382,7 +294,7 @@ console.log("houseCategoryOptions", houseCategoryOptions)
                                     )
                                 }
 
-
+*/}
 
                                {/* <SaveButton
                                     type={'submit'}
@@ -401,4 +313,4 @@ console.log("houseCategoryOptions", houseCategoryOptions)
     );
 }
 
-export default CreateHouse;
+export default CategoryFormContainer;

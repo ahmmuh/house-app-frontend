@@ -1,6 +1,7 @@
 import {useContext} from "react";
 import BookedRoom from "./BookedRoom";
 import DashboardContext from "../context/DashboardContext";
+import Sidebar from "./sidebar";
 
 const BookedRoomsList = ({ rooms }) => {
     const bookedRooms = useContext(DashboardContext)
@@ -9,11 +10,14 @@ const BookedRoomsList = ({ rooms }) => {
     return (
         <div className="container">
             <div className="row">
-                {houses.map((room, index) => (
-                    <div key={index} className="col-md-4">
-                        <BookedRoom room={room} />
-                    </div>
-                ))}
+              <div className={'col-4'}>
+                  <Sidebar />
+              </div>
+                    {houses.map((room, index) => (
+                        <div key={index} className="col-8">
+                            <BookedRoom room={room} />
+                        </div>
+                    ))}
             </div>
         </div>
     );

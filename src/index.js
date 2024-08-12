@@ -7,10 +7,10 @@ import "react-datepicker/dist/react-datepicker.css";
 import "@fortawesome/fontawesome-free/css/all.min.css"
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import Dashboard from "./pages/dashboard";
-import CreateHouse from "./pages/createHouse";
+import CategoryFormContainer from "./pages/categories/categoryFormContainer";
 import Content from "./pages/content";
 import NotFound from "./pages/notFound";
-import CreateHouseCategory from "./pages/create-house-category";
+import CreateHouseCategory from "./pages/categories/create-house-category";
 import RoomList from "./pages/RoomList";
 import BookedRoom from "./pages/BookedRoom";
 
@@ -26,7 +26,7 @@ const router = createBrowserRouter([
                 children: [
                     {
                         path: "create",
-                        element: <CreateHouse />,
+                        element: <CategoryFormContainer />,
                     },
                     {
                         path: "roomList",

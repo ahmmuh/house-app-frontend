@@ -11,7 +11,7 @@ function MainTextArea({
     return (
        <textarea
            name={name}
-           className={'form-control'}
+           className={'form-control mb-3'}
            cols={cols}
              rows={rows}
              onChange={changeHandler}

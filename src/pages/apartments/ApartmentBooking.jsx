@@ -1,8 +1,8 @@
 import React from 'react';
-import RadioInput from "../reusableInputs/RadioInput";
-import MainCard from "../reusableInputs/MainCard";
-import MainInput from "../reusableInputs/MainInput";
-import MainTextArea from "../reusableInputs/MainTextArea";
+import RadioInput from "../../components/reusableInputs/RadioInput";
+import MainCard from "../../components/reusableInputs/MainCard";
+import MainInput from "../../components/reusableInputs/MainInput";
+import MainTextArea from "../../components/reusableInputs/MainTextArea";
 
 function ApartmentBooking(props) {
 
@@ -104,3 +104,82 @@ function ApartmentBooking(props) {
 }
 
 export default ApartmentBooking;
+/*
+
+
+
+<>
+    <MainCard title={'Apartment'}>
+        <i className="fa-solid fa-restroom"></i>
+        <MainInput
+            type="number"
+            name="toilets"
+            value={house.toilets}
+            placeholder={'Toilets'}
+            label={"Toilets"}
+            min={1}
+            onChange={changeHandler}
+
+        />
+        <i className="fa-solid fa-shower"></i>
+        <MainInput
+            type="number"
+            name="bathrooms"
+            value={house.bathrooms}
+            placeholder={'bathrooms'}
+            label={"Bathroom"}
+            min={0}
+            onChange={changeHandler}
+
+        />
+
+    </MainCard>
+    <MainCard title={'Mashiinka dharka lagu dhaqo'}>
+        <RadioInput
+            type={'radio'}
+            name={'laundry'}
+            value={'true'}
+            id={'laundryYes'}
+            checked={house.laundry === true}
+            onChange={changeHandler}
+            label={'Yes'}
+
+        />
+
+        <RadioInput
+            type={'radio'}
+            name={'laundry'}
+            value={'false'}
+            id={'laundryNo'}
+            checked={house.houseWifi === false}
+            onChange={changeHandler}
+            label={'No'}
+
+        />
+    </MainCard>
+
+    <MainCard title={'Jiko / Koshiin'}>
+
+        <RadioInput
+            type={'radio'}
+            name={'houseKitchen'}
+            value={'true'}
+            id={'laundryYes'}
+            checked={house.houseKitchen === true}
+            onChange={changeHandler}
+            label={'Yes'}
+
+        />
+
+        <RadioInput
+            type={'radio'}
+            name={'houseKitchen'}
+            value={'false'}
+            id={'houseKitchenNo'}
+            checked={house.houseKitchen === false}
+            onChange={changeHandler}
+            label={'No'}
+
+        />
+    </MainCard>
+</>*/

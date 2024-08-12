@@ -7,7 +7,8 @@ function InputDatePicker({ selectedDate,name, changeHandler, ...props}) {
     return (
         <>
             <DatePicker
-                selected={selectedDate} name={name} onChange={handleDateChange} {...props}/>
+                selected={selectedDate}
+                name={name} onChange={handleDateChange} {...props}/>
         </>
     );
 }
