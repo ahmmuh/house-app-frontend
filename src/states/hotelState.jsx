@@ -3,7 +3,7 @@ import {useState} from 'react';
 const useHotelState = (props) => {
     const [hotel, setHotel] = useState({
         hotelName:"",
-        isSingelRoom:true,
+        isSingelRoom:false,
         price:0,
         description:"",
         hotelRoomWidth:0,
@@ -21,7 +21,6 @@ const useHotelState = (props) => {
         roomService:false,
         frontDesk24hr:false,
         breakfast:false,
-        category:""
     });
     return [hotel, setHotel]
 }

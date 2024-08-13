@@ -12,6 +12,9 @@ import MainCard from "../../components/reusableInputs/MainCard";
 import useHouseState from "../../states/houseState";
 import {checkSelectedCategory} from "../../utils/checkSelectedCategory";
 import CreateHotel from "../hotel/createHotel";
+import SelectedCategoryProvider from "../../context/selectedCategoryContext/SelectedCategoryProvider";
+import SelectedCategoryContext from "../../context/selectedCategoryContext/selectedCategoryContext";
+import {Link} from "react-router-dom";
 function CategoryFormContainer() {
 
     const houseData = useContext(HouseEnumContext);
@@ -190,32 +193,40 @@ console.log("houseCategoryOptions", houseCategoryOptions)
         console.log("New house", newHouse)
 
     };
-    // tar bort visa inmatningsfälts valuse
-    // check selected Category
+
+
+
 
     return (
         <div className={'container'}>
             <div className={'row'}>
-                    <MainSelect
-                        label={'Nuuca guriga'}
-                        name="category"
-                        id="category"
-                        value={house.category.name}
-                        options={houseCategoryOptions}
-                        onChange={handleCategoryChange}
+                {
+                    houseCategory.length === 0? (
+                        <>
+                            <h4>No date. create one</h4>
+                            <Link to="/dashboard/createCategory">Create Category</Link>
+                        </>
+                    ) : <>
+                        <MainSelect
+                            label={'Nuuca guriga'}
+                            name="category"
+                            id="category"
+                            value={house.category.name}
+                            options={houseCategoryOptions}
+                            onChange={handleCategoryChange}
 
-                    />
+                        />
 
-                    {
-                        (selectedCategory  !== "") && selectedCategory === "Hotel" && (
-                            <>
-                                {/*Hotel*/}
-                                <div>
-                                                <MainCard title={'Guest Information'}>
-                                                <CreateHotel selectedCategory={selectedCategory} />
-                                                </MainCard>
+                        {
+                            (selectedCategory  !== "") && selectedCategory === "Hotel" && (
+                                <>
+                                    {/*Hotel*/}
+                                    <div>
+                                        <MainCard title={'Guest Information'}>
+                                            <CreateHotel selectedCategory={selectedCategory} />
+                                        </MainCard>
 
-                                   {/* {
+                                        {/* {
                                         house !== undefined && house !== "Hotel" && (
                                             <>
                                                 <MainSelect
@@ -234,28 +245,28 @@ console.log("houseCategoryOptions", houseCategoryOptions)
                                     }*/}
 
 
-                                </div>
+                                    </div>
 
-                                {/*end hotel*/}
+                                    {/*end hotel*/}
 
-                                {/*Apartment */}
-                                {
+                                    {/*Apartment */}
+                                    {
 
-                                    selectedCategory === "Apartment" && (
-                                       <>Apartment</>
-                                    )
-                                }
+                                        selectedCategory === "Apartment" && (
+                                            <>Apartment</>
+                                        )
+                                    }
 
-                                {/*Apartment ends */}
-                                {
-                                    selectedCategory !== "Hotel" && (
-                                        <>
+                                    {/*Apartment ends */}
+                                    {
+                                        selectedCategory !== "Hotel" && (
+                                            <>
 
-                                        </>
-                                    )
-                                }
+                                            </>
+                                        )
+                                    }
 
-                               {/* {
+                                    {/* {
                                     selectedCategory === "Dabaq" && (
                                        <>
                                            <MainSelect
@@ -296,16 +307,19 @@ console.log("houseCategoryOptions", houseCategoryOptions)
 
 */}
 
-                               {/* <SaveButton
+                                    {/* <SaveButton
                                     type={'submit'}
                                     title={'Spara'}
                                     textColor={'text-primary'}
                                     backgroundColor={'btn btn-danger btn-md mt-3'}
                                 ></SaveButton>*/}
 
-                            </>
-                        )
-                    }
+                                </>
+                            )
+                        }
+                    </>
+                }
+
                     <p>{selectedCategory}</p>
 
             </div>

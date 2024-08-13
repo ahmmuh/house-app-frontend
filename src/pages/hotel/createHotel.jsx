@@ -31,7 +31,6 @@ function CreateHotel({selectedCategory}) {
 
     useEffect(() => {
         const squareMeters = hotel.hotelRoomWidth * hotel.hotelRoomHeight;
-        const category = selectedCategory;
         setHotel(prevState =>({
             ...prevState,
             squareMeters: squareMeters,
@@ -53,7 +52,7 @@ function CreateHotel({selectedCategory}) {
         }));
         const newHotelRoom ={
             hotelName:hotel.hotelName,
-            //roomType:hotel.roomType,
+            roomType:hotel.isNonSmokingRoom,
             price:hotel.price,
             description:hotel.description,
             hotelRoomWidth:hotel.hotelRoomWidth,
@@ -71,7 +70,7 @@ function CreateHotel({selectedCategory}) {
             roomService:hotel.roomService,
             frontDesk24hr:hotel.frontDesk24hr,
             breakfast:hotel.breakfast,
-            category:hotel.category,
+            category:selectedCategory,
             images: images
         }
         setHotel(prevState => ({
@@ -101,7 +100,7 @@ function CreateHotel({selectedCategory}) {
                                   value={hotel.price}
                                   onChange={changeHandler} />
                    </MainCard>
-                       <MainCard title={'RoomType?'}>
+                       <MainCard title={'Room Type?'}>
                            <RadioInput
                                type={'radio'}
                                name={'isSingelRoom'}
@@ -511,7 +510,7 @@ function CreateHotel({selectedCategory}) {
                    backgroundColor={'btn btn-success btn-md mt-3'}
                ></SaveButton>
            </form>
-           Ny selected category{selectedCategory}
+           Selected Category {selectedCategory}
        </div>
     );
 }
