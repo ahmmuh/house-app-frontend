@@ -2,13 +2,13 @@ import React, {useEffect} from 'react';
 import DatePicker from "../../calender/InputDatePicker";
 import MainCard from "../../components/reusableInputs/MainCard";
 import RadioInput from "../../components/reusableInputs/RadioInput";
-import useHouseState from "../../states/houseState";
 import {convertImagebase64} from "../../utils/convertImagebase64";
 import SaveButton from "../../components/SaveButton";
 import MainTextArea from "../../components/reusableInputs/MainTextArea";
 import MainInput from "../../components/reusableInputs/MainInput";
+import useHotelState from "../../states/hotelState";
 function CreateHotel({selectedCategory}) {
-    const [hotel,setHotel] = useHouseState()
+    const [hotel,setHotel] = useHotelState()
 
     const changeHandler = (e) => {
         const {name,value,files, type, checked} = e.target;
@@ -94,7 +94,8 @@ function CreateHotel({selectedCategory}) {
                                   onChange={changeHandler}
 
                        />
-
+                   </MainCard>
+                   <MainCard title={'Price'}>
                        <MainInput type={'number'}
                                   name={'price'} className={'form-control'}
                                   value={hotel.price}

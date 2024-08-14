@@ -21,6 +21,7 @@ const useHotelState = (props) => {
         roomService:false,
         frontDesk24hr:false,
         breakfast:false,
+        teaCoffeeMaker: false
     });
     return [hotel, setHotel]
 }

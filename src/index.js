@@ -11,8 +11,9 @@ import CategoryFormContainer from "./pages/categories/categoryFormContainer";
 import Content from "./pages/content";
 import NotFound from "./pages/notFound";
 import CreateHouseCategory from "./pages/categories/create-house-category";
-import RoomList from "./pages/RoomList";
-import BookedRoom from "./pages/BookedRoom";
+import HotelPage from "./pages/hotel/HotelPage";
+import HotelRoomList from "./pages/hotel/HotelRoomList";
+import CreateHotel from "./pages/hotel/createHotel";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const router = createBrowserRouter([
@@ -25,17 +26,28 @@ const router = createBrowserRouter([
                 element: <Dashboard />,
                 children: [
                     {
+                        path:'hotels',
+                        element:<HotelPage />,
+                        children: [
+                            {
+                                path:'create',
+                                element:<CreateHotel />,
+                            },
+                            {
+                                path: 'hotelRooms',
+                                element: <HotelRoomList />
+                            },
+                            {
+                                path:'room:/id',
+                                element: <HotelRoomList />
+                            }
+                        ]
+                    },
+                    {
                         path: "create",
                         element: <CategoryFormContainer />,
                     },
-                    {
-                        path: "roomList",
-                        element: <RoomList/>,
-                    },
-                    {
-                        path: "roomList/:id",
-                        element: <BookedRoom/>,
-                    },
+
                     {
                         path: "createCategory",
                         element: <CreateHouseCategory />,
@@ -50,6 +62,7 @@ const router = createBrowserRouter([
                         element: <NotFound />,
                     },
                 ],
+
             },
         ],
     },

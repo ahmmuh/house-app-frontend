@@ -1,19 +1,13 @@
 import React, {useContext, useEffect, useState,} from 'react';
-import MainInput from "../../components/reusableInputs/MainInput";
 import MainSelect from "../../components/reusableInputs/MainSelect";
 import HouseEnumContext from "../../context/HouseEnumContext";
-import MainTextArea from "../../components/reusableInputs/MainTextArea";
 import {createHouse} from "../../backend/houseService";
 import {convertImagebase64} from "../../utils/convertImagebase64";
-import SaveButton from "../../components/SaveButton";
 import DashboardContext from "../../context/DashboardContext";
-import RadioInput from "../../components/reusableInputs/RadioInput";
 import MainCard from "../../components/reusableInputs/MainCard";
 import useHouseState from "../../states/houseState";
 import {checkSelectedCategory} from "../../utils/checkSelectedCategory";
 import CreateHotel from "../hotel/createHotel";
-import SelectedCategoryProvider from "../../context/selectedCategoryContext/SelectedCategoryProvider";
-import SelectedCategoryContext from "../../context/selectedCategoryContext/selectedCategoryContext";
 import {Link} from "react-router-dom";
 function CategoryFormContainer() {
 
