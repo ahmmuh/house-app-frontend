@@ -1,21 +1,25 @@
-import React from 'react';
+import React,{lazy,Suspense} from 'react';
 import ReactDOM from 'react-dom/client';
 import 'bootstrap/dist/css/bootstrap.css';
 import './index.css';
-import App from './App';
 import "react-datepicker/dist/react-datepicker.css";
 import "@fortawesome/fontawesome-free/css/all.min.css"
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
-import Dashboard from "./pages/dashboard";
-import CategoryFormContainer from "./pages/categories/categoryFormContainer";
-import Content from "./pages/content";
-import NotFound from "./pages/notFound";
-import CreateHouseCategory from "./pages/categories/create-house-category";
-import HotelPage from "./pages/hotel/HotelPage";
-import HotelRoomList from "./pages/hotel/HotelRoomList";
-import CreateHotel from "./pages/hotel/createHotel";
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
+const App = lazy(() => import('./App'));
+
+const Dashboard = lazy(() => import("./pages/dashboard"));
+const  CategoryFormContainer = lazy(() => import("./pages/categories/categoryFormContainer"));
+const Content  = lazy(() => import("./pages/content")) ;
+const NotFound = lazy(() => import('./pages/notFound'));  ;
+const CreateHouseCategory  = lazy(() =>
+    import("./pages/categories/create-house-category"));
+const HotelPage = lazy(() => import("./pages/hotel/HotelPage.jsx"));
+const HotelRoomList = lazy(() => import("./pages/hotel/HotelRoomList"));
+const CreateHotel = lazy(() => import("./pages/hotel/createHotel")) ;
+const renderLoader = () => <p>Loading</p>;
+
 const router = createBrowserRouter([
     {
         path: "/",
@@ -23,11 +27,15 @@ const router = createBrowserRouter([
         children: [
             {
                 path: "dashboard",
-                element: <Dashboard />,
+                element: <Suspense fallback={renderLoader()}>
+                    <Dashboard />
+                </Suspense>,
                 children: [
                     {
                         path:'hotels',
-                        element:<HotelPage />,
+                        element:<Suspense fallback={renderLoader()}>
+                            <HotelPage />
+                        </Suspense>,
                         children: [
                             {
                                 path:'create',
@@ -45,7 +53,7 @@ const router = createBrowserRouter([
                     },
                     {
                         path: "create",
-                        element: <CategoryFormContainer />,
+                        element: <Suspense fallback={renderLoader()}><CategoryFormContainer /></Suspense>,
                     },
 
                     {
