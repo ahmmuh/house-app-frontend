@@ -7,6 +7,7 @@ import SaveButton from "../../components/SaveButton";
 import MainTextArea from "../../components/reusableInputs/MainTextArea";
 import MainInput from "../../components/reusableInputs/MainInput";
 import useHotelState from "../../states/hotelState";
+import {createHotel} from "../../backend/hotelService";
 function CreateHotel({selectedCategory}) {
     const [hotel,setHotel] = useHotelState()
 
@@ -50,7 +51,7 @@ function CreateHotel({selectedCategory}) {
                 base64: base64
             };
         }));
-        const newHotelRoom ={
+        const newHotel ={
             hotelName:hotel.hotelName,
             roomType:hotel.isNonSmokingRoom,
             price:hotel.price,
@@ -78,8 +79,8 @@ function CreateHotel({selectedCategory}) {
             squareMeters: calculateSquareMeters
         }));
         //checkSelectedCategory(selectedCategory, house)
-       // createHouse(newHotelRoom).then(result => result);
-        console.log("New house", newHotelRoom)
+      createHotel(newHotel).then(result => result);
+        console.log("New house", newHotel)
 
     };
 

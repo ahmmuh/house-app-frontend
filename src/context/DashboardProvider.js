@@ -1,10 +1,10 @@
 import DashboardContext from "./DashboardContext";
 import {useEffect, useState} from "react";
-import {getAllHouses} from "../backend/houseService";
+import {getAllHotels} from "../backend/hotelService";
 import {getAllHouseCategory} from "../backend/house-categoryService";
 
 function DashboardProvider({children}) {
-    const [houses, setHouses] = useState([]);
+    const [hotels, setHotels] = useState([]);
     const [houseCategory, setHouseCategory] = useState([]);
 
 
@@ -16,8 +16,8 @@ function DashboardProvider({children}) {
 
 
     const fetchHouses = async () => {
-        const houses = await getAllHouses();
-        setHouses(houses);
+        const hotels = await getAllHotels();
+        setHotels(hotels);
     }
 
     useEffect(() =>{
@@ -27,7 +27,7 @@ function DashboardProvider({children}) {
     //console.log("All Houses ", houses)
     return (
        <DashboardContext.Provider value={{
-           houses,
+           hotels,
            houseCategory
        }}>
            {children}

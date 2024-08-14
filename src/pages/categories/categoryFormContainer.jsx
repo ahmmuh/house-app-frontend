@@ -1,7 +1,7 @@
 import React, {useContext, useEffect, useState,} from 'react';
 import MainSelect from "../../components/reusableInputs/MainSelect";
 import HouseEnumContext from "../../context/HouseEnumContext";
-import {createHouse} from "../../backend/houseService";
+import {createHouse} from "../../backend/hotelService";
 import {convertImagebase64} from "../../utils/convertImagebase64";
 import DashboardContext from "../../context/DashboardContext";
 import MainCard from "../../components/reusableInputs/MainCard";
@@ -9,6 +9,7 @@ import useHouseState from "../../states/houseState";
 import {checkSelectedCategory} from "../../utils/checkSelectedCategory";
 import CreateHotel from "../hotel/createHotel";
 import {Link} from "react-router-dom";
+import createHotel from "../hotel/createHotel";
 function CategoryFormContainer() {
 
     const houseData = useContext(HouseEnumContext);
@@ -41,10 +42,12 @@ function CategoryFormContainer() {
     // gör om listorna till object med label och value så att de passar i options
 
 
+/*
     const houseStairsOptions = houseStairs.map(houseStair =>({
         label: houseStair,
         value: houseStair,
     }))
+*/
 
     /*
         const houseKitchenOptions = houseWater.map(kitchen =>({
@@ -57,10 +60,12 @@ function CategoryFormContainer() {
           label: house_water,
           value: house_water,
       }))*/
+/*
     const houseRoomOptions = roomType.map(room =>({
         label: room,
         value: room,
     }))
+*/
 
 
 
@@ -74,10 +79,10 @@ function CategoryFormContainer() {
           value:house_parking,
       }))*/
 
-    const houseTransactionOptions = houseTransactions.map(house_transaction =>({
+   /* const houseTransactionOptions = houseTransactions.map(house_transaction =>({
         label: house_transaction,
         value: house_transaction
-    }))
+    }))*/
     const houseCategoryOptions = houseCategory.map(category =>({
         label: category.name,
         value: category.name,
@@ -92,10 +97,10 @@ console.log("houseCategoryOptions", houseCategoryOptions)
     }
 
 
-    const handleHouseTransactionChange = (e)=>{
+   /* const handleHouseTransactionChange = (e)=>{
         setHouseTransaction(e.target.value)
         console.log("selectedHouseTransaction", e.target.value)
-    }
+    }*/
     //console.log("houseTypeOptions",houseTypeOptions)
 
     const changeHandler = (e) => {
@@ -139,7 +144,7 @@ console.log("houseCategoryOptions", houseCategoryOptions)
                 base64: base64
             };
         }));
-        const newHouse ={
+        const newHotel ={
             houseType:house.houseType,
             description: house.description,
             bathrooms: house.bathrooms,
@@ -183,8 +188,8 @@ console.log("houseCategoryOptions", houseCategoryOptions)
             squareMeters: calculateSquareMeters
         }));
        checkSelectedCategory(selectedCategory, house)
-        createHouse(newHouse).then(result => result);
-        console.log("New house", newHouse)
+        createHotel(newHotel).then(result => result);
+        console.log("New house", newHotel)
 
     };
 
