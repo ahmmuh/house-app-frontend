@@ -10,7 +10,7 @@ import useHotelState from "../../states/hotelState";
 import {createHotel} from "../../backend/hotelService";
 function CreateHotel({selectedCategory}) {
     const [hotel,setHotel] = useHotelState()
-
+        console.log("selectedCategory from create hotel component", selectedCategory)
     const changeHandler = (e) => {
         const {name,value,files, type, checked} = e.target;
         if (name === "images"){
@@ -24,6 +24,7 @@ function CreateHotel({selectedCategory}) {
                 ...prevState,
                 fromStartDate: hotel.fromStartDate,
                 toEndDate: hotel.toEndDate,
+                category: selectedCategory,
                 [name]: type === 'checkbox'? checked: (type === 'radio' ? value === 'true': value ),
             }))
         }
@@ -76,11 +77,12 @@ function CreateHotel({selectedCategory}) {
         }
         setHotel(prevState => ({
             ...prevState,
-            squareMeters: calculateSquareMeters
+            squareMeters: calculateSquareMeters,
+            category: selectedCategory,
         }));
         //checkSelectedCategory(selectedCategory, house)
       createHotel(newHotel).then(result => result);
-        console.log("New house", newHotel)
+        console.log("New hotel", newHotel)
 
     };
 

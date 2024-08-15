@@ -39,15 +39,21 @@ const router = createBrowserRouter([
                         children: [
                             {
                                 path:'create',
-                                element:<CreateHotel />,
+                                element:<Suspense fallback={renderLoader()}>
+                                    <CreateHotel />
+                                </Suspense>,
                             },
                             {
                                 path: 'hotelRooms',
-                                element: <HotelRoomList />
+                                element:<Suspense fallback={renderLoader()}>
+                                    <HotelRoomList />
+                                </Suspense>
                             },
                             {
                                 path:'room:/id',
-                                element: <HotelRoomList />
+                                element: <Suspense fallback={renderLoader()}>
+                                    <HotelRoomList />
+                                </Suspense>
                             }
                         ]
                     },
@@ -58,16 +64,22 @@ const router = createBrowserRouter([
 
                     {
                         path: "createCategory",
-                        element: <CreateHouseCategory />,
+                        element: <Suspense fallback={renderLoader()}>
+                            <CreateHouseCategory />
+                        </Suspense>,
                     },
                     {
                         path: "content",
-                        element: <Content />,
+                        element: <Suspense fallback={renderLoader()}>
+                            <Content />
+                        </Suspense>,
                     },
 
                     {
                         path: "*",
-                        element: <NotFound />,
+                        element: <Suspense fallback={renderLoader()}>
+                            <NotFound />
+                        </Suspense>,
                     },
                 ],
 
