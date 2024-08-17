@@ -5,6 +5,7 @@ import './index.css';
 import "react-datepicker/dist/react-datepicker.css";
 import "@fortawesome/fontawesome-free/css/all.min.css"
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
+import HotelRoomDetail from "./pages/hotel/HotelRoomDetail";
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 const App = lazy(() => import('./App'));
@@ -50,9 +51,9 @@ const router = createBrowserRouter([
                                 </Suspense>
                             },
                             {
-                                path:'room:/id',
+                                path:'room/:id',
                                 element: <Suspense fallback={renderLoader()}>
-                                    <HotelRoomList />
+                                    <HotelRoomDetail />
                                 </Suspense>
                             }
                         ]

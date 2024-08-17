@@ -1,7 +1,5 @@
 import React from 'react';
 import {Link, Outlet} from "react-router-dom";
-import CreateHotel from "./createHotel";
-import HotelRoomList from "./HotelRoomList";
 
 function HotelPage(props) {
     return (

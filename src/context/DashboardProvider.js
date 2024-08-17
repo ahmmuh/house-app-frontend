@@ -16,7 +16,7 @@ function DashboardProvider({children}) {
 
 
     const fetchHouses = async () => {
-        const hotels = await getAllHotels();
+        const hotels = await getAllHotels().then((hotels) => hotels);
         setHotels(hotels);
     }
 

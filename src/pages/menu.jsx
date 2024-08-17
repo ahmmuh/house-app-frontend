@@ -31,7 +31,7 @@ function Menu(props) {
                             </li>
 
                             <li className={'nav-item'}>
-                                <Link to={'/dashboard/hotels'} className="nav-link">Hotels
+                                <Link to={'/dashboard/hotels/hotelRooms'} className="nav-link">Hotels
                                 </Link>
                             </li>
 
