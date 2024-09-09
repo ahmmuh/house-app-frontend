@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from "react-router-dom";
+import MainButton from "./MainButton";
 function RoomCard({
                       title,
                       description,
@@ -17,9 +18,9 @@ function RoomCard({
                   }) {
     console.log(hotel)
     return (
-        <div className="container bg-light mb-3" {...props}>
-            <div className="row p-4">
-                <div className="col-5">
+        <div className="container bg-light mb-3 p-5" {...props}>
+            <div className="row">
+                <div className="col-4">
               {/*      {
                         hotel.images.map((image, index) => (
                             <img key={index} src={`data:image/jpeg:base64, ${Buffer.from(image).toString("base64")}`}
@@ -28,7 +29,7 @@ function RoomCard({
                     }*/}
                     <h2>Images</h2>
                 </div>
-                <div className="col">
+                <div className="col list-group">
                     <h4 className="text-primary">{title}</h4>
                     <p>{description}</p>
                     <p>{bathrooms} m²</p>
@@ -36,22 +37,30 @@ function RoomCard({
                     <p>Available {available}</p>
                     <p>From <span>{fromStartDate}</span></p>
                     {detailed && (
-                        <div className="col-5">
-                           <p> hotelRoomHeight {hotel?.hotelRoomHeight || 'N/A'}</p>
-                            <p>hotelRoomWidth {hotel?.hotelRoomWidth || 'No with'}</p>
-                            <p>squareMeters {hotel?.squareMeters || 'No Square'}</p>
-                            <p>hotelRoomParking {hotel?.hotelRoomParking || false}</p>
-                            <p> hotelRoomWifi {hotel?.hotelRoomWifi? 'Wifi' : 'No Wifi'}</p>
-                            <p>isNonSmokingRoom {hotel?.isNonSmokingRoom || false}</p>
-                            <p>privateToilet {hotel?.privateToilet || false}</p>
-                            <p>  restaurant {hotel?.restaurant || false}</p>
-                           <p> roomService {hotel?.roomService || false}</p>
-                            <p>teaCoffeeMaker {hotel?.teaCoffeeMaker || false}</p>
+                        <div className="col ">
+                           <p className={'list-group-item'}> hotelRoomHeight {hotel?.hotelRoomHeight || 'N/A'}</p>
+                            <p className={'list-group-item'}>hotelRoomWidth {hotel?.hotelRoomWidth || 'No with'}</p>
+                            <p className={'list-group-item'}>squareMeters {hotel?.squareMeters || 'No Square'}</p>
+                            <p className={'list-group-item'}>hotelRoomParking {hotel?.hotelRoomParking || false}</p>
+                            <p className={'list-group-item'}> hotelRoomWifi {hotel?.hotelRoomWifi? 'Wifi' : 'No Wifi'}</p>
+                            <p className={'list-group-item'}>isNonSmokingRoom {hotel?.isNonSmokingRoom || false}</p>
+                            <p className={'list-group-item'}>privateToilet {hotel?.privateToilet || false}</p>
+                            <p className={'list-group-item'}>  restaurant {hotel?.restaurant || false}</p>
+                           <p className={'list-group-item'}> roomService {hotel?.roomService || false}</p>
+                            <p className={'list-group-item'}>teaCoffeeMaker {hotel?.teaCoffeeMaker || false}</p>
+                            <MainButton
+                                title={'Book'}
+                                type={'submit'}
+                                textColor={'#fff'}
+                                bgColor={'#bb3dfd'}
+                            />
                         </div>
                     )}
                     <p>To <span>{toEndDate}</span></p>
                     {breakfastIncluded && <p><strong>Breakfast included</strong></p>}
+                    {children}
                 </div>
+
             </div>
 
         </div>

@@ -3,7 +3,7 @@ import {useParams} from "react-router-dom";
 import DashboardContext from "../../context/DashboardContext";
 import RoomCard from "../../components/reusableInputs/RoomCard";
 
-function HotelRoomDetail(props) {
+const HotelRoomDetail = (props) => {
     const {id} = useParams();
     const {hotels} = useContext(DashboardContext);
     console.log(hotels);
@@ -13,6 +13,7 @@ function HotelRoomDetail(props) {
     return (
         <>
        <RoomCard
+        title={hotel.hotelName}
         price={hotel.price}
         description={hotel.description}
         available={hotel.available}

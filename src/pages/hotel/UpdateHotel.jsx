@@ -1,9 +1,7 @@
-import React from 'react';
+import React from "react"
 
-function UpdateHotel(props) {
-    return (
-        <div>Update hotel</div>
-    );
+const UpdateHotel = (props) => {
+  return <div>Update hotel</div>
 }
 
-export default UpdateHotel;
+export default UpdateHotel
