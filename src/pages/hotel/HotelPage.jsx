@@ -1,5 +1,5 @@
 import React from "react"
-import { Link, Outlet } from "react-router-dom"
+import { Link, NavLink, Outlet } from "react-router-dom"
 
 const HotelPage = (props) => {
   return (
@@ -7,17 +7,24 @@ const HotelPage = (props) => {
       <div className={"row"}>
         <div className={"nav nav-tabs"}>
           <li className={"nav-item"}>
-            <Link
-              className={"nav-link active"}
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? "nav-link is-active" : "nav-link text-primary"
+              }
               to="/dashboard/hotels/hotelList"
             >
               Hotels
-            </Link>{" "}
+            </NavLink>{" "}
           </li>
           <li className={"nav-item"}>
-            <Link className={"nav-link"} to={"/dashboard/hotels/create"}>
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? "nav-link is-active" : "nav-link text-primary"
+              }
+              to={"/dashboard/hotels/create"}
+            >
               Create Hotel
-            </Link>
+            </NavLink>
           </li>
         </div>
         <Outlet />

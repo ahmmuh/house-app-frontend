@@ -1,7 +1,7 @@
 import React, { useContext } from "react"
 import RoomCard from "../../components/reusableInputs/RoomCard"
 import DashboardContext from "../../context/DashboardContext"
-import { Link } from "react-router-dom"
+import { Link, NavLink } from "react-router-dom"
 
 const HotelList = (props) => {
   const { hotels } = useContext(DashboardContext)
@@ -32,19 +32,19 @@ const HotelList = (props) => {
                 padding: ".1rem",
               }}
             >
-              <Link
+              <NavLink
                 className={"btn btn-outline-danger"}
                 to={`/dashboard/hotels/room/${hotel._id}`}
               >
                 View
-              </Link>
-              <Link className={"text-danger"} to={""}>
+              </NavLink>
+              <NavLink className={"text-danger"} to={""}>
                 <i className="fa-2x fa-regular fa-pen-to-square"></i>
-              </Link>
-              <Link to={""}>
+              </NavLink>
+              <NavLink to={""}>
                 <i className="fa-2x fa-regular fa-trash-can text-danger"></i>
                 Ahmed
-              </Link>
+              </NavLink>
             </div>
           </RoomCard>
         </div>

@@ -1,5 +1,5 @@
 import React, { useContext } from "react"
-import { Link } from "react-router-dom"
+import { Link, NavLink } from "react-router-dom"
 import DashboardContext from "../context/DashboardContext"
 
 function Sidebar(props) {
@@ -13,21 +13,59 @@ function Sidebar(props) {
   return (
     <ul className={"list-group list-group-flush"}>
       <li className="list-group-item">
-        <Link to={"/dashboard/hotels"} className="nav-link-item">
+        <NavLink
+          exact
+          className={({ isActive }) =>
+            isActive ? "is-active" : "text-primary"
+          }
+          to={"/dashboard/hotels"}
+        >
           Hotels
-        </Link>
+        </NavLink>
       </li>
       <li className="list-group-item">
-        <Link>List group item 2</Link>
+        <NavLink
+          exact
+          className={({ isActive }) =>
+            isActive ? "is-active" : "text-primary"
+          }
+          to={"/t1"}
+        >
+          List group item 2
+        </NavLink>
       </li>
       <li className="list-group-item">
-        <Link to={""}>List group item 3</Link>
+        <NavLink
+          exact
+          className={({ isActive }) =>
+            isActive ? "is-active" : "text-primary"
+          }
+          to={"/t2"}
+        >
+          List group item 3
+        </NavLink>
       </li>
       <li className="list-group-item">
-        <Link>List group item 4</Link>
+        <NavLink
+          exact
+          className={({ isActive }) =>
+            isActive ? "is-active" : "text-primary"
+          }
+          to="/t3"
+        >
+          List group item 4
+        </NavLink>
       </li>
       <li className="list-group-item">
-        <Link>List group item 5</Link>
+        <NavLink
+          exact
+          className={({ isActive }) =>
+            isActive ? "is-active" : "text-primary"
+          }
+          to="/t4"
+        >
+          List group item 5
+        </NavLink>
       </li>
     </ul>
   )
