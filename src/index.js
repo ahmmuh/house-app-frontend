@@ -17,7 +17,7 @@ const renderLoader = () => <p>Loading</p>
 
 const router = createBrowserRouter([
   {
-    path: "",
+    path: "/",
     element: (
       <Suspense fallback={renderLoader}>
         <App />

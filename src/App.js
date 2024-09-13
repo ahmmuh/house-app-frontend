@@ -1,14 +1,23 @@
 import { Outlet } from "react-router-dom"
 import "./App.css"
 import DashboardProvider from "./context/DashboardProvider"
-import Dashboard from "./pages/DashboardPage"
+import DashboardPage from "./pages/DashboardPage"
+import Sidebar from "./pages/sidebar"
 
 function App() {
   return (
     <>
       <DashboardProvider>
-        <div className={"container mt-4"}>
-          <Dashboard />
+        <div className="container mb-4 mt-2">
+          <div className="row py-3">
+            <div className={"col-3"}>
+              <Sidebar />
+            </div>
+            <div className={"col"}>
+              <h3>Välkommen till admin</h3>
+              <DashboardPage />
+            </div>
+          </div>
         </div>
       </DashboardProvider>
     </>
