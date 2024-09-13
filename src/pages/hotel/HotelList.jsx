@@ -3,7 +3,7 @@ import RoomCard from "../../components/reusableInputs/RoomCard"
 import DashboardContext from "../../context/DashboardContext"
 import { Link } from "react-router-dom"
 
-const HotelRoomList = (props) => {
+const HotelList = (props) => {
   const { hotels } = useContext(DashboardContext)
   console.log("hotelData", hotels)
 
@@ -53,4 +53,4 @@ const HotelRoomList = (props) => {
   )
 }
 
-export default HotelRoomList
+export default HotelList

@@ -13,7 +13,9 @@ function Sidebar(props) {
   return (
     <ul className={"list-group list-group-flush"}>
       <li className="list-group-item">
-        <Link className="nav-link-item">List group item 1</Link>
+        <Link to={"/dashboard/hotels"} className="nav-link-item">
+          Hotels
+        </Link>
       </li>
       <li className="list-group-item">
         <Link>List group item 2</Link>

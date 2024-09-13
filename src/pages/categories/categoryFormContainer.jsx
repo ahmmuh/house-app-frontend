@@ -1,11 +1,7 @@
-import React, { useContext, useEffect, useState } from "react"
+import React, { useContext, useState } from "react"
 import MainSelect from "../../components/reusableInputs/MainSelect"
-import HouseEnumContext from "../../context/HouseEnumContext"
-import { createHouse } from "../../backend/hotelService"
-import { convertImagebase64 } from "../../utils/convertImagebase64"
 import DashboardContext from "../../context/DashboardContext"
 import MainCard from "../../components/reusableInputs/MainCard"
-import useHouseState from "../../states/houseState"
 import CreateHotel from "../hotel/createHotel"
 import { Link } from "react-router-dom"
 const CategoryFormContainer = () => {

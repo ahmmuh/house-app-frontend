@@ -2,7 +2,7 @@ import React from "react"
 import { Outlet } from "react-router-dom"
 import Sidebar from "./sidebar"
 
-function Dashboard(props) {
+const DashboardPage = (props) => {
   return (
     <div className="container mb-4 mt-2">
       <div className="row py-3">
@@ -18,4 +18,4 @@ function Dashboard(props) {
   )
 }
 
-export default Dashboard
+export default DashboardPage

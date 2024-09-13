@@ -1,6 +1,7 @@
+import { Outlet } from "react-router-dom"
 import "./App.css"
 import DashboardProvider from "./context/DashboardProvider"
-import Dashboard from "./pages/Dashboard"
+import Dashboard from "./pages/DashboardPage"
 
 function App() {
   return (

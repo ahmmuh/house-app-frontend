@@ -1,18 +1,18 @@
-import React, {useContext} from 'react';
-import {useParams} from "react-router-dom";
-import DashboardContext from "../../context/DashboardContext";
-import RoomCard from "../../components/reusableInputs/RoomCard";
+import React, { useContext } from "react"
+import { useParams } from "react-router-dom"
+import DashboardContext from "../../context/DashboardContext"
+import RoomCard from "../../components/reusableInputs/RoomCard"
 
-const HotelRoomDetail = (props) => {
-    const {id} = useParams();
-    const {hotels} = useContext(DashboardContext);
-    console.log(hotels);
-    const hotel = hotels.find(hotel => hotel._id === id);
-    console.log("The founded hotel ", hotel);
-    console.log('HotelRoomDetail', props, id);
-    return (
-        <>
-       <RoomCard
+const HotelDetail = (props) => {
+  const { id } = useParams()
+  const { hotels } = useContext(DashboardContext)
+  console.log(hotels)
+  const hotel = hotels.find((hotel) => hotel._id === id)
+  console.log("The founded hotel ", hotel)
+  console.log("HotelDetail", props, id)
+  return (
+    <>
+      <RoomCard
         title={hotel.hotelName}
         price={hotel.price}
         description={hotel.description}
@@ -32,9 +32,9 @@ const HotelRoomDetail = (props) => {
         squareMeters={hotel.squareMeters}
         teaCoffeeMaker={hotel.teaCoffeeMaker}
         detailed={true}
-       />
-        </>
-    );
+      />
+    </>
+  )
 }
 
-export default HotelRoomDetail;
+export default HotelDetail
