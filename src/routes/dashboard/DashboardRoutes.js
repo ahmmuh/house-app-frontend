@@ -1,10 +1,9 @@
 import ContentContainer from "../../pages/ContentContainer"
 import Dashboard from "../../pages/DashboardPage"
-import categoryRoutes from "../categoryRoute"
+import CategoryRouteContainer from "../CategoryRouteContainer"
 
 import { hotelRoute } from "../hotelRoute"
 import SuspenseWrapper from "./SuspenseWrapper"
-
 const dashboardRoutes = [
   {
     path: "dashboard",
@@ -14,7 +13,14 @@ const dashboardRoutes = [
       </SuspenseWrapper>
     ),
 
-    children: hotelRoute,
+    children: [
+      ...hotelRoute,
+
+      {
+        path: "categories/*",
+        element: <CategoryRouteContainer />,
+      },
+    ],
   },
 
   {

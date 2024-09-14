@@ -1,7 +1,8 @@
 import React from "react"
 import { Link } from "react-router-dom"
 
-const NotFoundPage = (props) => {
+const NotFoundPage = () => {
+  console.log("From Not found page")
   return (
     <div className="row m-auto w-75 p-5">
       <div className={"alert alert-danger"}>

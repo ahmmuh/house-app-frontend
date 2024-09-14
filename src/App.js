@@ -1,9 +1,7 @@
-import { Outlet, useLocation } from "react-router-dom"
 import "./App.css"
 import DashboardProvider from "./context/DashboardProvider"
 import DashboardPage from "./pages/DashboardPage"
 import Sidebar from "./pages/sidebar"
-import { useEffect } from "react"
 
 function App() {
   return (

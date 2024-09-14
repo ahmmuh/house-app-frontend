@@ -30,7 +30,7 @@ export const hotelRoute = [
         ),
       },
       {
-        path: "room/:id",
+        path: ":id",
         element: (
           <SuspenseWrapper>
             <HotelDetail />

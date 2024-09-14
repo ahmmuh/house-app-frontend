@@ -1,15 +1,25 @@
-import CategoryFormContainer from "../pages/categories/categoryFormContainer"
-import SuspenseWrapper from "./dashboard/SuspenseWrapper"
+// import { createBrowserRouter } from "react-router-dom"
+// import SuspenseWrapper from "./dashboard/SuspenseWrapper"
+// import CategoryList from "../pages/categories/CategoryList"
 
-const categoryRoutes = [
-  {
-    path: "create",
-    element: (
-      <SuspenseWrapper>
-        <CategoryFormContainer />
-      </SuspenseWrapper>
-    ),
-  },
-]
+// const categoryRoute = createBrowserRouter([
+//   {
+//     path: "categories",
+//     element: (
+//       <SuspenseWrapper>
+//         <CategoryList />
+//       </SuspenseWrapper>
+//     ),
+//   },
 
-export default categoryRoutes
+//   {
+//     path: "categories/:id",
+//     element: (
+//       <SuspenseWrapper>
+//         <CategoryList />
+//       </SuspenseWrapper>
+//     ),
+//   },
+// ])
+
+// export default categoryRoute

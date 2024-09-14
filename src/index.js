@@ -8,22 +8,29 @@ import "@fortawesome/fontawesome-free/css/all.min.css"
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
 import dashboardRoutes from "./routes/dashboard/DashboardRoutes.js"
 import SuspenseWrapper from "./routes/dashboard/SuspenseWrapper.js"
+import TestPage from "./pages/TestPage.jsx"
 import NotFoundPage from "./pages/NotFoundPage.jsx"
 const root = ReactDOM.createRoot(document.getElementById("root"))
-
 const App = lazy(() => import("./App"))
-
-const renderLoader = () => <p>Loading</p>
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: (
-      <Suspense fallback={renderLoader}>
+      <SuspenseWrapper>
         <App />
-      </Suspense>
+      </SuspenseWrapper>
     ),
     children: dashboardRoutes,
+  },
+
+  {
+    path: "/tes",
+    element: (
+      <SuspenseWrapper>
+        <TestPage />
+      </SuspenseWrapper>
+    ),
   },
   {
     path: "*",

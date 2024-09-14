@@ -3,9 +3,9 @@ import DashboardContext from "../context/DashboardContext"
 import { Outlet } from "react-router-dom"
 
 const ContentContainer = () => {
-  const data = useContext(DashboardContext)
+  // const data = useContext(DashboardContext)
 
-  console.log("housesData from content", data)
+  // console.log("housesData from content", data)
   return (
     <div>
       {/* <ul className="list-group">
@@ -23,7 +23,7 @@ const ContentContainer = () => {
               </>
             ))}
       </ul> */}
-      <Outlet />
+      {/* <Outlet /> */}
     </div>
   )
 }
