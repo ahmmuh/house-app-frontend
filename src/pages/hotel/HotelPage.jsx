@@ -6,7 +6,7 @@ const HotelPage = (props) => {
     <div className={"container"}>
       <div className={"row"}>
         <div className={"nav nav-tabs"}>
-          <li className={"nav-item"}>
+          {/* <li className={"nav-item"}>
             <NavLink
               className={({ isActive }) =>
                 isActive ? "nav-link is-active" : "nav-link text-primary"
@@ -15,7 +15,7 @@ const HotelPage = (props) => {
             >
               Hotels
             </NavLink>{" "}
-          </li>
+          </li> */}
           <li className={"nav-item"}>
             <NavLink
               className={({ isActive }) =>

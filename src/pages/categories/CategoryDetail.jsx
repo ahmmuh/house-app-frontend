@@ -10,7 +10,7 @@ const CategoryDetail = (props) => {
   console.log("Hotels ", hotels)
   const hotelList = hotels.filter((hotel) => hotel.category === categoryId)
   if (hotelList.length > 0) {
-    return <HotelList hotelList={hotelList} />
+    return <HotelList hotels={hotelList} />
   }
 
   console.log("hotelList from category component ", hotelList)

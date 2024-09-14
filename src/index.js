@@ -10,6 +10,7 @@ import dashboardRoutes from "./routes/dashboard/DashboardRoutes.js"
 import SuspenseWrapper from "./routes/dashboard/SuspenseWrapper.js"
 import TestPage from "./pages/TestPage.jsx"
 import NotFoundPage from "./pages/NotFoundPage.jsx"
+import Menu from "./pages/menu.jsx"
 const root = ReactDOM.createRoot(document.getElementById("root"))
 const App = lazy(() => import("./App"))
 
