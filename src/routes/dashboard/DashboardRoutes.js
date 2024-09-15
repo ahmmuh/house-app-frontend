@@ -1,3 +1,5 @@
+import CategoryFormContainer from "../../pages/categories/categoryFormContainer"
+import CreateHouseCategory from "../../pages/categories/create-house-category"
 import ContentContainer from "../../pages/ContentContainer"
 import Dashboard from "../../pages/DashboardPage"
 import CategoryRouteContainer from "../CategoryRouteContainer"
@@ -19,6 +21,15 @@ const dashboardRoutes = [
       {
         path: "categories/*",
         element: <CategoryRouteContainer />,
+      },
+
+      {
+        path: "categories/create",
+        element: (
+          <SuspenseWrapper>
+            <CreateHouseCategory />
+          </SuspenseWrapper>
+        ),
       },
     ],
   },

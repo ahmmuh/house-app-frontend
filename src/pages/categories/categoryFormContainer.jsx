@@ -49,7 +49,7 @@ const CategoryFormContainer = () => {
             {selectedCategory &&
               houseCategoryOptions.find(
                 (option) => option.value === selectedCategory
-              )?.label === "Hotel" && (
+              )?.label === "Hotels" && (
                 <>
                   <div>
                     <MainCard title={"Guest Information"}>

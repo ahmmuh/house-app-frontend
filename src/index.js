@@ -11,6 +11,8 @@ import SuspenseWrapper from "./routes/dashboard/SuspenseWrapper.js"
 import TestPage from "./pages/TestPage.jsx"
 import NotFoundPage from "./pages/NotFoundPage.jsx"
 import Menu from "./pages/menu.jsx"
+import LoginPage from "./pages/login/LoginPage.jsx"
+import RegisterPage from "./pages/register/RegisterPage.jsx"
 const root = ReactDOM.createRoot(document.getElementById("root"))
 const App = lazy(() => import("./App"))
 
@@ -26,10 +28,18 @@ const router = createBrowserRouter([
   },
 
   {
-    path: "/tes",
+    path: "/login",
     element: (
       <SuspenseWrapper>
-        <TestPage />
+        <LoginPage />
+      </SuspenseWrapper>
+    ),
+  },
+  {
+    path: "/register",
+    element: (
+      <SuspenseWrapper>
+        <RegisterPage />
       </SuspenseWrapper>
     ),
   },

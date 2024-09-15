@@ -1,7 +1,7 @@
 import React from "react"
 import { Link, NavLink, Outlet } from "react-router-dom"
 
-const HotelPage = (props) => {
+const HotelRoomPage = (props) => {
   return (
     <div className={"container"}>
       <h5 className="lead">Diiwaan gali hotel cusub</h5>
@@ -34,4 +34,4 @@ const HotelPage = (props) => {
   )
 }
 
-export default HotelPage
+export default HotelRoomPage

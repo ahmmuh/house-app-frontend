@@ -20,7 +20,6 @@ const useHouseState = () => {
         houseStair: "",
         houseKitchen: false,
         houseParking: false,
-        airportShuttle: false,
         familyRooms: false,
         restaurant: false,
         nonSmokingRooms: false,

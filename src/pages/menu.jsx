@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 
 function Menu(props) {
   return (
-    <div className={"container-fluid pl-4 bg-dark"}>
+    <div className={"container-fluid pl-4 menu-bg"}>
       <div>
         <nav className="navbar navbar-expand-lg ">
           <button
@@ -29,8 +29,24 @@ function Menu(props) {
                   Dashboard
                 </Link>
               </li>
+
+              <li className={"nav-item"}>
+                <Link to={"/dashboard/categories/create"} className="nav-link">
+                  Add Category
+                </Link>
+              </li>
             </ul>
           </div>
+          {/* <div className="d-flex ">
+            <ul className="dropdown-menu">
+              <li className="dropdown-item">
+                <Link to={"/login"}>Login</Link>
+              </li>
+              <li className="dropdown-item">
+                <Link to={"/login"}>Register</Link>
+              </li>
+            </ul>
+          </div> */}
         </nav>
       </div>
     </div>
