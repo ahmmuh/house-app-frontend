@@ -8,7 +8,10 @@ function Sidebar(props) {
   return (
     <ul className={"list-group list-group-flush"}>
       {houseCategory.map((category) => (
-        <li className="list-group-item" key={category._id}>
+        <li
+          className="list-group-item d-flex justify-content-between "
+          key={category._id}
+        >
           <NavLink
             key={category._id}
             className={({ isActive }) =>
@@ -18,6 +21,7 @@ function Sidebar(props) {
           >
             {category.name}
           </NavLink>
+          <i className="fa-solid fa-chevron-right "></i>
         </li>
       ))}
     </ul>
